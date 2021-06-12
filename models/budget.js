@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 
 const BudgetSchema = new mongoose.Schema({
-    email: {
-      type: String,
-      required: [true, "Email required"],
-      trim: true,
-      lowercase: true
-    },
-    type: {
+    _userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "User"},
+    budgetType: {
       type: String,
       required: [true, 'Category required'],
       lowercase:true,
@@ -18,7 +13,7 @@ const BudgetSchema = new mongoose.Schema({
         required: [true, 'Amount required'],
         min: [0, 'Minimun amount is zero']
     },
-    date:{
+    budgetDate:{
         type:Date,
         required: [true, 'Date required'],
     },
@@ -28,7 +23,6 @@ const BudgetSchema = new mongoose.Schema({
     },
     subcategory:{
         type: [String],
-        required: [true, 'Subcategory required'],
     },
     description:{
         type:String,

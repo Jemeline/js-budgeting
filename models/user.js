@@ -28,27 +28,22 @@ const UserSchema = new mongoose.Schema({
         type:Date,
         required: [true, 'DateMember required'],
     },
-    role:{
-        type: Boolean,
-        required: [true, 'Type required'],
-        default:false,
-    },
     isVerified: { type: Boolean, default: false },
-    passwordResetToken: String,
-    passwordResetExpires: Date
+    passwordResetToken: {type: String},
+    passwordResetExpires: {type: Number},
   });
   
 UserSchema.pre("save", function(next) {
     var user = this;
     if (!user.isModified('password')) return next();
-    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-        if (err) return next(err);
-        bcrypt.hash(user.password, salt, function(err, hash) {
-        if (err) return next(err);
-        user.password = hash;
-        next();
+        bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+            if (err) return next(err);
+            bcrypt.hash(user.password, salt, function(err, hash) {
+            if (err) return next(err);
+            user.password = hash;
+            next();
+        });
     });
-});
 });
 
 UserSchema.methods.comparePassword = function(candidatePassword, cb) {
@@ -56,6 +51,12 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
         if (err) return cb(err);
         cb(null, isMatch);
     });
+};
+
+UserSchema.methods.toJSON = function() {
+    const obj = this.toObject();
+    delete obj.password;
+    return obj;
 };
 
 const User = mongoose.model("User", UserSchema);

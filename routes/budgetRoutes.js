@@ -1,9 +1,10 @@
 const express = require('express');
 const budgetModel = require('../models/budget');
 const app = express();
+const { check, validationResult} = require('express-validator');
 
-app.get('/budget/:email', async (req, res) => {
-    const budget = await budgetModel.find({email:req.params.email});
+app.get('/budget-by-user/:id', async (req, res) => {
+    const budget = await budgetModel.find({_userId:req.params.id});
     try {
       res.send(budget);
     } catch (err) {
@@ -11,9 +12,24 @@ app.get('/budget/:email', async (req, res) => {
     }
 });
 
-app.post('/budget', async (req, res) => {
+app.get('/budget-by-id/:id', async (req, res) => {
+  const budget = await budgetModel.find({_id:req.params.id});
+  try {
+    res.send(budget);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/budget',[
+  check('_userId','_userId required').not().isEmpty(),
+  check('budgetType', 'Budget type required').not().isEmpty(),
+  check('amount', 'Amount required').not().isEmpty(),
+  check('budgetDate', 'Budget date required').not().isEmpty(),
+  check('category', 'Category required').not().isEmpty(),
+  check('description', 'Description required').not().isEmpty()
+  ], async (req, res) => {
     const budget = new budgetModel(req.body);
-    
     try {
       await budget.save();
       res.send(budget);
@@ -25,8 +41,7 @@ app.post('/budget', async (req, res) => {
 app.delete('/budget/:id', async (req, res) => {
     try {
       const budget = await budgetModel.findByIdAndDelete(req.params.id)
-  
-      if (!budget) res.status(404).send("No item found")
+      if (!budget) res.status(404).send("No budget item found")
       res.status(200).send()
     } catch (err) {
       res.status(500).send(err)
