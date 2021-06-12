@@ -3,7 +3,6 @@ import { Modal, ModalHeader, ModalBody, Button} from 'reactstrap';
 import {apiGetUser} from '../utils/api';
 import VerifyEmail from './Authentication/VerifyEmail';
 import colors from '../utils/design';
-import Toolbar from '@material-ui/core/Toolbar';
 
 function Home() {
     const [modal,setModal] = useState(false);
