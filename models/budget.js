@@ -4,11 +4,11 @@ const BudgetSchema = new mongoose.Schema({
     _userId: {type: mongoose.Schema.Types.ObjectId, required: true, ref: "User"},
     budgetType: {
       type: String,
-      required: [true, 'Category required'],
+      required: [true, 'Budget type required'],
       lowercase:true,
       enum: ['income', 'expense']
     },
-    amount:{
+    budgetAmount:{
         type: Number,
         required: [true, 'Amount required'],
         min: [0, 'Minimun amount is zero']
@@ -17,16 +17,20 @@ const BudgetSchema = new mongoose.Schema({
         type:Date,
         required: [true, 'Date required'],
     },
-    category:{
-        type: [String],
+    budgetCategory:{
+        type: String,
         required: [true, 'Category required'],
     },
-    subcategory:{
-        type: [String],
+    budgetSubcategory:{
+        type: String,
     },
-    description:{
+    budgetDescription:{
         type:String,
         required: [true, "Description required"],
+    },
+    budgetAccount:{
+        type:String,
+        required: [true, "Account required"],
     }
   });
   

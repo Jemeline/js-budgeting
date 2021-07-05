@@ -25,33 +25,33 @@ function Login(){
     };
 
     async function handleLogin(){
-    try{
-        if (!email||!password){
-            dismissAlerts();
-            setAlertLogin(true);
-            setAlertMessage("Please fill in all required fields");
-        } else {
-            if (!sessionStorage.getItem('id')){
-                const payload = {"email":email,"password":password}
-                const data = await apiLogin(payload);
-                login(data.data.user._id);
-                history.push(`/`);
-            } else {
+        try{
+            if (!email||!password){
                 dismissAlerts();
-                setAlertAlreadyLoggedIn(true);
+                setAlertLogin(true);
+                setAlertMessage("Please fill in all required fields");
+            } else {
+                if (!sessionStorage.getItem('id')){
+                    const payload = {"email":email,"password":password}
+                    const data = await apiLogin(payload);
+                    login(data.data.user._id);
+                    history.push(`/`);
+                } else {
+                    dismissAlerts();
+                    setAlertAlreadyLoggedIn(true);
+                }
             }
-        }
-        } catch (error){
-            console.log(error);
-            if (error.response.status === 401){
-                setAlertLogin(true);
-                setAlertMessage(error.response.data.msg);
-            } else {
-                dismissAlerts();
-                setAlertLogin(true);
-                setAlertMessage("Oops... Something Went Wrong");
-            } 
-        };
+            } catch (error){
+                console.log(error);
+                if (error.response.status === 401){
+                    setAlertLogin(true);
+                    setAlertMessage(error.response.data.msg);
+                } else {
+                    dismissAlerts();
+                    setAlertLogin(true);
+                    setAlertMessage("Oops... Something Went Wrong");
+                } 
+            };
     };
   
     return (

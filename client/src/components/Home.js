@@ -21,7 +21,7 @@ function Home() {
     const closeBtn = <Button size="sm" onClick={()=> {setModal(false);}} style={{color:colors.roseDust,backgroundColor:"white",borderColor:"white",outline:'none'}}><strong style={{fontSize:'20px'}}>&times;</strong></Button>;
     return (
         <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'65px',flexDirection:'row'}}>
-            <div style={{width:'200px'}}/>
+            <div style={{width:'240px'}}/>
             <h4>Dashboard</h4>
             <Modal isOpen={modal} toggle={()=> {setModal(false);}} style={{marginTop:'65px',width:'30vw'}}>
                 <ModalHeader toggle={()=> {setModal(false);}} close={closeBtn}>Please Verify Your Email</ModalHeader>

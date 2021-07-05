@@ -3,6 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter} from 'react-router-dom';
 import Routes from './routes/routes';
+import Header from './components/Navigation/Header';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <Header/>
         <div> 
           <Routes/>
         </div>

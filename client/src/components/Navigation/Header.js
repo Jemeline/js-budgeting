@@ -12,13 +12,13 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { useHistory } from "react-router-dom";
+import { useHistory,useLocation } from "react-router-dom";
 import {logout} from '../../utils/common';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-const drawerWidth = 200;
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +46,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Navigation() {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation().pathname;
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -68,16 +70,15 @@ export default function Navigation() {
         classes={{
           paper: classes.drawerPaper,
         }}
+        hidden={(location==='/login')||(location==='/register')}
       >
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem button onClick={()=>history.push(`/update-budget`)}>
+              <ListItemIcon><InboxIcon/></ListItemIcon>
+              <ListItemText primary={"Update My Budget"}/>
+            </ListItem>
           </List>
           <Divider />
           <List>

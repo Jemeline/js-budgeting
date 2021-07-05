@@ -49,3 +49,13 @@ export async function apiGetUser(id) {
         throw error;
     }    
 };
+
+export async function apiAddBudget(payload) {
+    try { 
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/budget`, payload);
+        return res;
+    } catch (error){
+        console.log(error);
+        throw error;
+    }    
+};

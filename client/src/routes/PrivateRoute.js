@@ -1,6 +1,5 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
-import Header from '../components/Navigation/Header';
 
 const PrivateRoute = ({ component: Component , ...path})=>{
     return (
@@ -8,7 +7,6 @@ const PrivateRoute = ({ component: Component , ...path})=>{
             if (sessionStorage.getItem('id')){
                 return(
                     <div>
-                        <Header/>
                         <Component {...props} />
                 </div>)}
             else {

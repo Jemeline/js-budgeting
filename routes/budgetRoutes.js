@@ -24,16 +24,18 @@ app.get('/budget-by-id/:id', async (req, res) => {
 app.post('/budget',[
   check('_userId','_userId required').not().isEmpty(),
   check('budgetType', 'Budget type required').not().isEmpty(),
-  check('amount', 'Amount required').not().isEmpty(),
+  check('budgetAmount', 'Amount required').not().isEmpty(),
   check('budgetDate', 'Budget date required').not().isEmpty(),
-  check('category', 'Category required').not().isEmpty(),
-  check('description', 'Description required').not().isEmpty()
+  check('budgetCategory', 'Category required').not().isEmpty(),
+  check('budgetDescription', 'Description required').not().isEmpty(),
+  check('budgetAccount', 'Account required').not().isEmpty()
   ], async (req, res) => {
     const budget = new budgetModel(req.body);
     try {
       await budget.save();
       res.send(budget);
     } catch (err) {
+      console.log(err);
       res.status(500).send(err);
     }
 });
