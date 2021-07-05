@@ -114,7 +114,7 @@ function UpdateBudget() {
 
     return (
         <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'65px',flexDirection:'row'}}>
-            <div style={{width:'240px'}}/>
+            {/* <div style={{width:'240px'}}/> */}
             <div>
                 <Collapse in={alertBudget} style={{marginBottom:'10px'}}>
                     <Alert severity={alertBudgetSeverity} onClose={() => setAlertBudget(false)}>{alertBudgetMessage}</Alert>

@@ -59,3 +59,13 @@ export async function apiAddBudget(payload) {
         throw error;
     }    
 };
+
+export async function apiGetBudgetByUser(id) {
+    try { 
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/budget-by-user/${id}`);
+        return res;
+    } catch (error){
+        console.log(error);
+        throw error;
+    }    
+};
