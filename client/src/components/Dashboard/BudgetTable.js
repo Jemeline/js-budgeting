@@ -25,7 +25,7 @@ function BudgetTable() {
         description: ele.budgetDescription,
         category: ele.budgetCategory, 
         subcategory: ele.budgetSubcategory,
-        amount: ele.budgetAmount,
+        amount: ele.budgetAmount.toFixed(2),
         id: ele._id,
     }}));
   }, []);

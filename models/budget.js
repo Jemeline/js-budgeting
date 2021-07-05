@@ -14,7 +14,7 @@ const BudgetSchema = new mongoose.Schema({
         min: [0, 'Minimun amount is zero']
     },
     budgetDate:{
-        type:Date,
+        type:String,
         required: [true, 'Date required'],
     },
     budgetCategory:{
