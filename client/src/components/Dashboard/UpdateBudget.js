@@ -8,15 +8,22 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import Select from 'react-select';
-import {ExpenseCategories,BudgetAccounts,IncomeCategories} from '../../utils/BudgetCategories';
+import {ExpenseCategories,IncomeCategories} from '../../utils/BudgetCategories';
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 import {getFormattedDate} from '../../utils/common';
 import {apiAddBudget} from '../../utils/api';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
+const darkTheme = createMuiTheme({
+    palette: {
+      type: 'dark',
+    },
+  });
 function UpdateBudget() {
     const [budgetType, setBudgetType] = useState('expense');
-    const [budgetAccount, setBudgetAccount] = useState('');
     const [budgetDescription, setBudgetDescription] = useState('');
     const [budgetAmount, setBudgetAmount] = useState('');
     const [budgetDate, setBudgetDate] = useState(new Date());
@@ -43,17 +50,11 @@ function UpdateBudget() {
     const handleChangeBudgetSubcategory = (e) => {
         setBudgetSubcategory(e);
     };
-    const handleChangeBudgetAccount = (e) => {
-        setBudgetAccount(e);
-    };
-
     const resetBudgetCategories = () => {
         setBudgetCategory('');
         setBudgetSubcategories([]);
         setBudgetSubcategory('');
-        setBudgetAccount('');
     };
-
     const resetAlert = () => {
         setAlertBudget(false);
         setAlertBudgetMessage('');
@@ -89,9 +90,6 @@ function UpdateBudget() {
             else if (typeof(budgetCategory)!=='object'){
                 raiseAlert('Select a category',"error");
             }
-            else if(typeof(budgetAccount)!=='object'){
-                raiseAlert('Select an account',"error");
-            }
             else {
                 const payload = {
                     _userId:sessionStorage.getItem('id'),
@@ -101,7 +99,6 @@ function UpdateBudget() {
                     budgetCategory:budgetCategory.label,
                     budgetDescription:budgetDescription,
                     budgetSubcategory:budgetSubcategory.label,
-                    budgetAccount:budgetAccount.label
                 };
                 const data = await apiAddBudget(payload);
                 clearBudgetForm();    
@@ -111,46 +108,44 @@ function UpdateBudget() {
                 raiseAlert('Something went wrong...',"error");
             };
     };
+    const getColor = (bt) => {
+        return budgetType === bt ? '#D90166' : 'transparent';
+    };
 
     return (
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'65px',flexDirection:'row'}}>
-            {/* <div style={{width:'240px'}}/> */}
+        <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'row', backgroundColor:'#28365f'}}>
             <div>
-                <Collapse in={alertBudget} style={{marginBottom:'10px'}}>
+                <Collapse in={alertBudget}>
                     <Alert severity={alertBudgetSeverity} onClose={() => setAlertBudget(false)}>{alertBudgetMessage}</Alert>
                 </Collapse>
-                <ToggleButtonGroup
-                    value={budgetType}
-                    exclusive
-                    onChange={handleBudgetType}
-                    size="small"
-                    >
-                    <ToggleButton value="expense">
-                        Expense
-                    </ToggleButton>
-                    <ToggleButton value="income">
-                        Income
-                    </ToggleButton>
-                </ToggleButtonGroup>
+                <button style={{color:'white',backgroundColor:getColor('expense'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}} onClick={()=> setBudgetType('expense')}>Expense</button>
+                <button style={{color:'white',backgroundColor:getColor('income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}} onClick={()=> setBudgetType('income')}>Income</button>
                 <Input
                     type="text"
+                    id="inputID"
                     placeholder="Description"
                     onChange={(e) => setBudgetDescription(e.target.value)}
                     value={budgetDescription}
                     valid={ budgetDescription.length > 0 }
                     invalid={ budgetAmount.length < 0}
-                />
+                    style={{padding:'10px',backgroundColor:'transparent',borderColor:'transparent',color:'white',fontSize:'15px'}}
+                /> 
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        disableToolbar
-                        variant="inline"
-                        format="MM/dd/yyyy"
-                        value={budgetDate}
-                        onChange={handleBudgetDateChange}
-                    />
+                    <ThemeProvider theme={darkTheme}>
+                        <CssBaseline />
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="MM/dd/yyyy"
+                                value={budgetDate}
+                                onChange={handleBudgetDateChange}
+                                style={{padding:'10px',color:'white'}}
+                            />
+                    </ThemeProvider>
                 </MuiPickersUtilsProvider>
                 <Input
                     type="number"
+                    id="inputID"
                     placeholder="Amount"
                     min="0.01"
                     step="0.01"
@@ -158,6 +153,7 @@ function UpdateBudget() {
                     value={budgetAmount}
                     valid={ budgetAmount > 0 }
                     invalid={ budgetAmount.length > 0 && budgetAmount <= 0}
+                    style={{padding:'10px',backgroundColor:'transparent',borderColor:'transparent',color:'white',fontSize:'15px'}}
                 />
                 <FormFeedback>
                     Amount must be greater than zero
@@ -168,6 +164,7 @@ function UpdateBudget() {
                     onChange={(e)=> handleChangeBudgetCategory(e)}
                     value={budgetCategory}
                     menuPlacement="auto"
+                    styles={colourStyles}
                 />
                 <Select
                     placeholder={"Subcategory"}
@@ -176,13 +173,7 @@ function UpdateBudget() {
                     value={budgetSubcategory}
                     menuPlacement="auto"
                     isClearable
-                />
-                <Select
-                    placeholder={"Account"}
-                    options={BudgetAccounts.map((e)=>{return {label:e,value:e}})}
-                    onChange={(e)=> handleChangeBudgetAccount(e)}
-                    value={budgetAccount}
-                    menuPlacement="auto"
+                    styles={colourStyles}
                 />
                 <Button
                     size="md"
@@ -191,9 +182,28 @@ function UpdateBudget() {
                         e.preventDefault();
                         await handleAddBudget();
                     }}
-                > Add</Button>
+                    style={{color:'white',backgroundColor:'#D90166', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginBottom:'2%',paddingTop:'1%',paddingBottom:'1%',paddingLeft:'5px',paddingRight:'5px'}}>
+                Add</Button>
             </div>
     </div>
-)}
-
+)};
+export const colourStyles = {
+    control: styles => ({ ...styles, backgroundColor: 'transparent',borderColor:'transparent'}),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        color:'black',
+      };
+    },
+    placeholder: (styles, { data }) => ({
+        ...styles,
+        color:'white',
+        fontSize:'15px'
+    }),
+    singleValue: (styles, { data }) => ({
+        ...styles,
+        color:'white',
+        fontSize:'15px'
+    }),
+};
 export default UpdateBudget;

@@ -28,10 +28,6 @@ const BudgetSchema = new mongoose.Schema({
         type:String,
         required: [true, "Description required"],
     },
-    budgetAccount:{
-        type:String,
-        required: [true, "Account required"],
-    }
   });
   
 const Budget = mongoose.model("Budget", BudgetSchema);

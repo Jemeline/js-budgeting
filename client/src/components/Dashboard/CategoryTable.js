@@ -2,12 +2,21 @@ import React, {useState, useEffect} from 'react';
 import {DataGrid} from '@material-ui/data-grid';
 import {getDaysArray, getMonthsArray, monthNames} from '../../utils/common';
 import {ExpenseCategories} from '../../utils/BudgetCategories';
-
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 function CategoryTable({budget, interval, index, categories}) {
   const [budgetRows, setBudgetRows] = useState([]);
   const [budgetColumns, setBudgetColumns] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(async () => {
+    setLoading(true);
     let intervalList = [];
     const filteredBudget = typeof(budget.data)==='undefined'?[]:budget.data;
     const startDate = new Date();
@@ -36,16 +45,15 @@ function CategoryTable({budget, interval, index, categories}) {
         amount: ele.sum.toFixed(2),
         id: ele.label,
     }}));
+    setLoading(false);
   }, [budget, index, interval,]);
 
   return (
-    <div style={{backgroundColor:'white', zIndex:-1, height:'calc(50vh)'}}>
-    <div style = {{height:'50vh',display:'flex', alignItems:'center',justifyContent:'center'}}>
-      <div style = {{height:'50vh',width:'25vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
-          <DataGrid rows={budgetRows} columns={budgetColumns} density={'compact'} disableColumnMenu={true} disableColumnSelector={true} autoHeight={true} hideFooter={true}/>
+      <div style = {{backgroundColor:'#28365f',height:'50vh',width:'25vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
+      <ThemeProvider theme={darkTheme}>
+          <DataGrid loading={loading} rows={budgetRows} columns={budgetColumns} density={'compact'} disableColumnMenu={true} disableColumnSelector={true} autoHeight={true} hideFooter={true} />
+      </ThemeProvider>
       </div>
-    </div>
-    </div>
   )
 }
 export default CategoryTable;

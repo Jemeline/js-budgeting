@@ -9,13 +9,23 @@ import {logout} from '../../utils/common';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Box from '@material-ui/core/Box';
 
 export default function Navigation() {
   const history = useHistory();
+  const location = useLocation().pathname;
+
+  const getColor = (loc) => {
+    console.log(location);
+      return location === loc ? '#D90166' : 'transparent';
+  };
 
   return (
-    <div>
-      <Button> Dashboard</Button>
+    <div style={{height:'60px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+        <button style={{color:'white',backgroundColor:getColor('/'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Dashboard</button>
+        <button style={{color:'white',backgroundColor:getColor('/expenses'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Expenses</button>
+        <button style={{color:'white',backgroundColor:getColor('/income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Income</button>
+        <button style={{color:'white',backgroundColor:getColor('/history'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>History</button>
     </div>
   );
 };

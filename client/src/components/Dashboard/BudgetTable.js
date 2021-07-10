@@ -10,9 +10,7 @@ function BudgetTable() {
   const id = sessionStorage.getItem('id');
 
   useEffect(async () => {
-    const budget = await apiGetBudgetByUser(id)
-    console.log(budget)
-    // Set chart data and colors
+    const budget = await apiGetBudgetByUser(id);
     setBudgetColumns([
         { field: 'date', headerName: 'Date', flex: 0.125},
         { field: 'description', headerName: 'Description', flex: 0.225},

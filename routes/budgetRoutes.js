@@ -28,7 +28,6 @@ app.post('/budget',[
   check('budgetDate', 'Budget date required').not().isEmpty(),
   check('budgetCategory', 'Category required').not().isEmpty(),
   check('budgetDescription', 'Description required').not().isEmpty(),
-  check('budgetAccount', 'Account required').not().isEmpty()
   ], async (req, res) => {
     const budget = new budgetModel(req.body);
     try {
