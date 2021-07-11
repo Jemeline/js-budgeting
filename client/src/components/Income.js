@@ -22,7 +22,7 @@ function Home() {
 
     return (
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'column',height:'calc(100vh-60px)'}}>
-            <BudgetTable budget={budgetData} type={'expense'}/>
+            <BudgetTable budget={budgetData} type={'income'}/>
         </div>
 )}
 

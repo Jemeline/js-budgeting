@@ -17,7 +17,7 @@ export const ExpenseCategories = [
 ];
 
 export const IncomeCategories = [
-    {value:"Wages/Salary",label:"Wages/Salary",subcategories:[]},
+    {value:"Wages/Salary",label:"Wages/Salary",subcategories:["Jada Wages", "Sean Wages"]},
     {value:"Business",label:"Business",subcategories:[]},
     {value:"Gift",label:"Gift",subcategories:[]},
     {value:"Investments",label:"Investments",subcategories:[]},
