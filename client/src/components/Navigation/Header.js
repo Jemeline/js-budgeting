@@ -22,10 +22,10 @@ export default function Navigation() {
 
   return (
     <div style={{height:'60px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-        <button style={{color:'white',backgroundColor:getColor('/'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Dashboard</button>
-        <button style={{color:'white',backgroundColor:getColor('/expenses'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Expenses</button>
-        <button style={{color:'white',backgroundColor:getColor('/income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Income</button>
-        <button style={{color:'white',backgroundColor:getColor('/history'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>History</button>
+        <button onClick={()=>history.push('/')} style={{color:'white',backgroundColor:getColor('/'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Dashboard</button>
+        <button onClick={()=>history.push('/expenses')} style={{color:'white',backgroundColor:getColor('/expenses'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Expenses</button>
+        <button onClick={()=>history.push('/income')} style={{color:'white',backgroundColor:getColor('/income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>Income</button>
+        <button onClick={()=>history.push('/history')} style={{color:'white',backgroundColor:getColor('/history'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'12px'}}>History</button>
     </div>
   );
 };

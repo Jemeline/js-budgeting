@@ -4,6 +4,7 @@ import PrivateRoute from './PrivateRoute';
 import Login from '../components/Authentication/Login';
 import Register from '../components/Authentication/Register';
 import Home from '../components/Home';
+import Expenses from '../components/Expenses'
 import VerifyEmail from '../components/Authentication/VerifyEmail';
 
 const Routes = () => (
@@ -11,6 +12,9 @@ const Routes = () => (
         <Route exact path="/register" render={() => (<Register/>)}/>
         <Route exact path="/login" render={() => (<Login/>)}/>
         <PrivateRoute exact path="/" component={Home}/>
+        <PrivateRoute exact path="/expenses" component={Expenses}/>
+        <PrivateRoute exact path="/income" component={Home}/>
+        <PrivateRoute exact path="/history" component={Home}/>
         <PrivateRoute exact path="/verify" component={VerifyEmail}/>
     </Switch>
 )
