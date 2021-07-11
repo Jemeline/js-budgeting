@@ -64,7 +64,7 @@ function Register(){
 
 	return (
 	<div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-			<div style={{height:'calc(100vh)',width:'40vw',display:'flex',alignItems:'center',justifyContent:'center'}}>
+			<div style={{height:'calc(100vh)',width:'40vw',display:'flex',alignItems:'center',justifyContent:'center',color:'white'}}>
 					<Col>
 						<Collapse in={alertRegister} style={{marginBottom:'10px'}}>
 								<Alert severity="error" onClose={() => setAlertRegister(false)}>{alertMessage}</Alert>
@@ -161,7 +161,7 @@ function Register(){
 								dismissAlerts();
 								await handleRegister();
 							}}
-							style={{marginTop:'10px'}}
+							style={{marginTop:'10px',backgroundColor:'#D90166',borderColor:'#D90166'}}
 						> Register
 						</Button> 
 				</Form>

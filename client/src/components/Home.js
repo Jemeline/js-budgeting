@@ -4,7 +4,6 @@ import {apiGetUser,apiGetBudgetByUser} from '../utils/api';
 import VerifyEmail from './Authentication/VerifyEmail';
 import CategoryTable from './Dashboard/CategoryTable'
 import UpdateBudget from './Dashboard/UpdateBudget';
-import colors from '../utils/design';
 
 function Home() {
     const [modal,setModal] = useState(false);
@@ -24,7 +23,7 @@ function Home() {
         }  
     }, []);
 
-    const closeBtn = <Button size="sm" onClick={()=> {setModal(false);}} style={{color:colors.roseDust,backgroundColor:"white",borderColor:"white",outline:'none'}}><strong style={{fontSize:'20px'}}>&times;</strong></Button>;
+    const closeBtn = <Button size="sm" onClick={()=> {setModal(false);}} style={{backgroundColor:"white",borderColor:"white",outline:'none'}}><strong style={{fontSize:'20px'}}>&times;</strong></Button>;
     return (
         <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row',height:'calc(100vh-60px)'}}>
             <CategoryTable budget={budgetData} interval={'M'} index={0} categories={5}/>

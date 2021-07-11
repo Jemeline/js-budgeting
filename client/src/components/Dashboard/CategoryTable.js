@@ -2,15 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {DataGrid} from '@material-ui/data-grid';
 import {getDaysArray, getMonthsArray, monthNames} from '../../utils/common';
 import {ExpenseCategories} from '../../utils/BudgetCategories';
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-const darkTheme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
-});
-function CategoryTable({budget, interval, index, categories}) {
+import {darkTheme,tableStyles} from '../../utils/design';
+
+export default function CategoryTable({budget, interval, index, categories}) {
+  const classes = tableStyles();
   const [budgetRows, setBudgetRows] = useState([]);
   const [budgetColumns, setBudgetColumns] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,7 +32,7 @@ function CategoryTable({budget, interval, index, categories}) {
     categoryList.map(ele => {ele.sum = filteredBudget.filter(e => intervalList.includes(e.filteredDate) && e.budgetCategory===ele.label).reduce((sum, curr) => sum + curr.budgetAmount, 0)});
     categoryList.sort(function (a, b) {return b.sum - a.sum;});
     const reducedCategoryList = categoryList.slice(0,categories);
-    // Set chart data and colors
+
     setBudgetColumns([
         { field: 'category', headerName: 'Category', flex: 0.5},
         { field: 'amount', headerName: 'Amount ($)', flex: 0.5},
@@ -49,11 +46,9 @@ function CategoryTable({budget, interval, index, categories}) {
   }, [budget, index, interval,]);
 
   return (
-      <div style = {{backgroundColor:'#28365f',height:'50vh',width:'25vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
-      <ThemeProvider theme={darkTheme}>
-          <DataGrid loading={loading} rows={budgetRows} columns={budgetColumns} density={'compact'} disableColumnMenu={true} disableColumnSelector={true} autoHeight={true} hideFooter={true} />
-      </ThemeProvider>
+    <div style = {{backgroundColor:'#28365f',height:'50vh',width:'40vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
+          <ThemeProvider theme={darkTheme}>
+              <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} hideFooter={true} disableColumnMenu={true} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
+          </ThemeProvider>
       </div>
-  )
-}
-export default CategoryTable;
+  )};

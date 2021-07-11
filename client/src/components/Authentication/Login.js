@@ -56,7 +56,7 @@ function Login(){
   
     return (
         <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
-            <div style={{height:'calc(100vh)',width:'40vw',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <div style={{height:'calc(100vh)',width:'40vw',display:'flex',alignItems:'center',justifyContent:'center',color:'white'}}>
                     <Col>
                         <Collapse in={alertLogin} style={{marginBottom:'10px'}}>
                             <Alert severity="error" onClose={() => setAlertLogin(false)}>{alertMessage}</Alert>
@@ -103,7 +103,7 @@ function Login(){
                                     dismissAlerts();
                                     await handleLogin();
                                 }}
-                                style={{marginTop:'10px'}}
+                                style={{marginTop:'10px',backgroundColor:'#D90166',borderColor:'#D90166'}}
                             > Sign In</Button>
                         </Form>
                     Don't Have an Account?

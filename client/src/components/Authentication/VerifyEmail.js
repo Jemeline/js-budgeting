@@ -6,7 +6,6 @@ import {apiVerify,apiToken} from '../../utils/api';
 import {validateToken} from '../../utils/regex';
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
-import colors from '../../utils/design';
 
 function VerifyEmail({height}){
     const [alertVerify, setAlertVerify] = useState(false);
@@ -89,7 +88,7 @@ function VerifyEmail({height}){
                                 await sendToken();
                                 setLoading(false);
                             }}
-                            style={{marginBottom:'0px',marginTop:'0px',backgroundColor:colors.roseDust,borderColor:colors.roseDust}}
+                            style={{marginBottom:'0px',marginTop:'0px'}}
                             > Send Me a Code
                         </Button>
                     </div>
@@ -118,7 +117,7 @@ function VerifyEmail({height}){
                                 setLoading(false);
                             }}
                             disabled={!validateToken(token)}
-                            style={{marginTop:'15px',backgroundColor:colors.roseDust,borderColor:colors.roseDust}}
+                            style={{marginTop:'15px'}}
                     > Confirm My Email
                     </Button>
                     <Button color="link" style={{fontSize:'12px',outline:'none'}} onClick={()=>{setStep(0);}}>I need a token</Button>  

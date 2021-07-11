@@ -2,8 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { useHistory } from "react-router-dom";
 import {apiGetBudgetByUser} from '../../utils/api';
+import { ThemeProvider } from '@material-ui/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import {darkTheme,tableStyles} from '../../utils/design';
+
 
 function BudgetTable() {
+  const classes = tableStyles();
   const [budgetRows, setBudgetRows] = useState([]);
   const [budgetColumns, setBudgetColumns] = useState([]);
   const history = useHistory();
@@ -29,12 +34,13 @@ function BudgetTable() {
   }, []);
 
   return (
-    <div style={{backgroundColor:'white', zIndex:-1, height:'calc(80vh)'}}>
-    <div style = {{height:'80vh',display:'flex', alignItems:'center',justifyContent:'center'}}>
-      <div style = {{height:'80vh',width:'55vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
-          <DataGrid rows={budgetRows} columns={budgetColumns} disableColumnMenu={true} onCellDoubleClick={(params)=>history.push(`/budget-item/`)} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
+    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#28365f',height:'75vh',width:'75vw',}}>
+      <p style = {{color:'white'}}>Expense History</p>
+      <div style = {{display:'flex', alignItems:'center',justifyContent:'center',height:'70vh' }}>
+            <ThemeProvider theme={darkTheme}>
+                <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} disableColumnMenu={true} onCellDoubleClick={(params)=>history.push(`/budget-item/`)} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
+            </ThemeProvider>
       </div>
-    </div>
     </div>
   )
 }

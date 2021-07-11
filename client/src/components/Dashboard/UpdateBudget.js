@@ -179,8 +179,8 @@ function UpdateBudget() {
                     size="md"
                     type='submit'
                     onClick={async (e) => {
-                        e.preventDefault();
                         await handleAddBudget();
+                        window.location.reload(false);
                     }}
                     style={{color:'white',backgroundColor:'#D90166', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginBottom:'2%',paddingTop:'1%',paddingBottom:'1%',paddingLeft:'5px',paddingRight:'5px'}}>
                 Add</Button>
