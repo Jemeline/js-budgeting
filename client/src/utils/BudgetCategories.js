@@ -2,7 +2,7 @@ export const ExpenseCategories = [
     {value:"Transportation",label:"Transportation",subcategories:['Gas','Car Payment','Maintenance/Oil Change','Repairs','Tires','DMV','Car Warranty','Parking Fees','Registration','Other']},
     {value:"Food",label:"Food",subcategories:['Groceries',"Farmers' Market"]},
     {value:"Housing",label:"Housing",subcategories:['Rent',"Furniture","Kitchen Supplies"]},
-    {value:"Utilities",label:"Utilities",subcategories:[]},
+    {value:"Utilities",label:"Utilities",subcategories:['Internet','Water','Electricity']},
     {value:"Social",label:"Social",subcategories:["Bars","Date Night","Eating Out"]},
     {value:"Medical",label:"Medical",subcategories:[]},
     {value:"Health",label:"Health",subcategories:["Gym Membership"]},
