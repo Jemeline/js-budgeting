@@ -60,6 +60,26 @@ export async function apiAddBudget(payload) {
     }    
 };
 
+export async function apiUpdateBudget(id,payload) {
+    try { 
+        const res = await axios.patch(`${process.env.REACT_APP_API_URL}/api/budget/${id}`, payload);
+        return res;
+    } catch (error){
+        console.log(error);
+        throw error;
+    }    
+};
+
+export async function apiRemoveBudget(id) {
+    try { 
+        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/api/budget/${id}`);
+        return res;
+    } catch (error){
+        console.log(error);
+        throw error;
+    }    
+};
+
 export async function apiGetBudgetByUser(id) {
     try { 
         const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/budget-by-user/${id}`);

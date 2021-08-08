@@ -4,7 +4,7 @@ import {apiGetUser,apiGetBudgetByUser} from '../utils/api';
 import VerifyEmail from './Authentication/VerifyEmail';
 import CategoryTable from './Dashboard/CategoryTable';
 import RecentTransactions from './Dashboard/RecentTransactions';
-import UpdateBudget from './Dashboard/UpdateBudget';
+import UpdateBudgetReusable from './Dashboard/UpdateBudgetReusable';
 import Total from './Dashboard/Total';
 
 function Home() {
@@ -49,7 +49,9 @@ function Home() {
                 <div style={{height:'2.5vh'}}/>
                 <CategoryTable budget={budgetData} categories={5} type={'expense'}/>
             </div>
-            <UpdateBudget/>
+            <div style={{backgroundColor:'#393E46'}}>
+                <UpdateBudgetReusable BudgetClass="add"/>
+            </div>
             <Modal isOpen={modal} toggle={()=> {setModal(false);}} style={{marginTop:'65px',width:'30vw'}}>
                 <ModalHeader toggle={()=> {setModal(false);}} close={closeBtn}>Please Verify Your Email</ModalHeader>
                     <ModalBody style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>

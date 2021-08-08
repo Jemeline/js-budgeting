@@ -18,7 +18,7 @@ export default function Total({budget,interval,type}) {
   }, [budget]);
 
   return (
-    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#28365f',height:'9vh',width:'9vw',justifyContent:'center',borderRadius:'10px'}}>
+    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#393E46',height:'9vh',width:'9vw',justifyContent:'center',borderRadius:'10px'}}>
         <p style = {{color:'white',margin:0}}>{type==="expense"?"Total Expenses":type==="income"?"Total Income":type==='saving'?"Savings Rate":"Invalid Type"}</p>
         <p style = {{color:'white',margin:0}}>{type==="saving"?"":"$"}{total}{type==="saving"?"%":""}</p>
     </div>

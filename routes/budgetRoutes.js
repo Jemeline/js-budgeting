@@ -51,10 +51,11 @@ app.delete('/budget/:id', async (req, res) => {
 
 app.patch('/budget/:id', async (req, res) => {
     try {
-      await budgetModel.findByIdAndUpdate(req.params.id, req.body)
-      await budgetModel.save()
+      const budget = await budgetModel.findByIdAndUpdate(req.params.id, req.body)
+      await budget.save()
       res.send(budget)
     } catch (err) {
+      console.log(err);
       res.status(500).send(err)
     }
 });
