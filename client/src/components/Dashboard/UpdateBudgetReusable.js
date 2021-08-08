@@ -129,7 +129,7 @@ function UpdateBudgetReusable({BudgetType,BudgetDescription,BudgetAmount,BudgetD
                 <Collapse in={alertBudget}>
                     <Alert severity={alertBudgetSeverity} onClose={() => setAlertBudget(false)}>{alertBudgetMessage}</Alert>
                 </Collapse>
-                <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
+                <div hidden={BudgetClass === 'edit'} style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
                     <button style={{color:'white',backgroundColor:getColor('expense'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'15px'}} onClick={()=> setBudgetType('expense')}>Expense</button>
                     <button style={{color:'white',backgroundColor:getColor('income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'15px'}} onClick={()=> setBudgetType('income')}>Income</button>
                 </div>

@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import {darkTheme,tableStyles} from '../../utils/design';
 import { Modal, ModalHeader, ModalBody, Button, ModalFooter} from 'reactstrap';
 import UpdateBudgetReusable from './UpdateBudgetReusable';
+import {capitalizeFirst} from '../../utils/common';
 
 export default function BudgetTable({budget, type}) {
   const classes = tableStyles();
@@ -54,7 +55,7 @@ export default function BudgetTable({budget, type}) {
                 <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} onRowClick={(row)=> handleEditBudgetRow(row.row)} disableColumnMenu={true} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
             </ThemeProvider>
             <Modal isOpen={editModal} toggle={()=> {setEditModal(false);}} style={{width:'25vw'}}>
-              <ModalHeader style={{backgroundColor:'#263859',width:'25vw'}}>Edit Expense</ModalHeader>
+              <ModalHeader style={{backgroundColor:'#263859',width:'25vw'}}>Edit {capitalizeFirst(type)}</ModalHeader>
               <ModalBody style={{backgroundColor:'#17223B',height:'60vh',width:'25vw',display:'flex',alignItems:'center',justifyContent:'center'}}>
                   <UpdateBudgetReusable BudgetType={type} BudgetDescription={BudgetDescription} BudgetAmount={BudgetAmount} BudgetDate={BudgetDate} BudgetCategory={BudgetCategory} BudgetSubcategory={BudgetSubcategory} BudgetClass="edit" BudgetId={BudgetId}/>
               </ModalBody>
