@@ -10,7 +10,7 @@ import {ExpenseCategories,IncomeCategories} from '../../utils/BudgetCategories';
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 import {getFormattedDate} from '../../utils/common';
-import {apiAddBudget} from '../../utils/api';
+import {apiAddBudget,apiUpdateBudget,apiRemoveBudget} from '../../utils/api';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,13 +20,13 @@ const darkTheme = createMuiTheme({
       type: 'dark',
     },
   });
-function UpdateBudget() {
-    const [budgetType, setBudgetType] = useState('expense');
-    const [budgetDescription, setBudgetDescription] = useState('');
-    const [budgetAmount, setBudgetAmount] = useState('');
-    const [budgetDate, setBudgetDate] = useState(new Date());
-    const [budgetCategory, setBudgetCategory] = useState('');
-    const [budgetSubcategory, setBudgetSubcategory] = useState('');
+function UpdateBudgetReusable({BudgetType,BudgetDescription,BudgetAmount,BudgetDate,BudgetCategory,BudgetSubcategory,BudgetClass,BudgetId}) {
+    const [budgetType, setBudgetType] = useState((BudgetType) ? BudgetType : 'expense');
+    const [budgetDescription, setBudgetDescription] = useState((BudgetDescription) ? BudgetDescription : '');
+    const [budgetAmount, setBudgetAmount] = useState((BudgetAmount) ? BudgetAmount : '');
+    const [budgetDate, setBudgetDate] = useState((BudgetDate) ? new Date(BudgetDate) : new Date());
+    const [budgetCategory, setBudgetCategory] = useState((BudgetCategory) ? {label:BudgetCategory,value:BudgetCategory} : '');
+    const [budgetSubcategory, setBudgetSubcategory] = useState((BudgetSubcategory) ? {label:BudgetSubcategory,value:BudgetSubcategory} : '');
     const [BudgetSubcategories, setBudgetSubcategories] = useState([]);
     const [alertBudget, setAlertBudget] = useState(false);
     const [alertBudgetMessage, setAlertBudgetMessage] = useState('');
@@ -73,7 +73,7 @@ function UpdateBudget() {
 
     };
 
-    async function handleAddBudget(){
+    async function handleBudget(){
         try{
             resetAlert();
             if(!budgetDescription){
@@ -98,26 +98,41 @@ function UpdateBudget() {
                     budgetDescription:budgetDescription,
                     budgetSubcategory:budgetSubcategory.label,
                 };
-                const data = await apiAddBudget(payload);
-                clearBudgetForm();    
+                if (BudgetClass === 'add') {
+                    const data = await apiAddBudget(payload);
+                    clearBudgetForm();   
+                } else {
+                    const data = await apiUpdateBudget(BudgetId,payload);
+                }     
             }
             } catch (error){
                 console.log(error);
                 raiseAlert('Something went wrong...',"error");
             };
     };
+
+    async function handleRemoveBudget(){
+        try{
+            resetAlert();
+            const data = await apiRemoveBudget(BudgetId);  
+        } catch (error){
+            console.log(error);
+            raiseAlert('Something went wrong...',"error");
+        };
+    };
     const getColor = (bt) => {
         return budgetType === bt ? '#D90166' : 'transparent';
     };
 
     return (
-        <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'row', backgroundColor:'#393E46'}}>
-            <div>
+            <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
                 <Collapse in={alertBudget}>
                     <Alert severity={alertBudgetSeverity} onClose={() => setAlertBudget(false)}>{alertBudgetMessage}</Alert>
                 </Collapse>
-                <button style={{color:'white',backgroundColor:getColor('expense'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'15px'}} onClick={()=> setBudgetType('expense')}>Expense</button>
-                <button style={{color:'white',backgroundColor:getColor('income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'15px'}} onClick={()=> setBudgetType('income')}>Income</button>
+                <div style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
+                    <button style={{color:'white',backgroundColor:getColor('expense'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'15px'}} onClick={()=> setBudgetType('expense')}>Expense</button>
+                    <button style={{color:'white',backgroundColor:getColor('income'),borderRadius:'25px', outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginTop:'2%',paddingLeft:'5px',paddingRight:'5px',fontSize:'15px'}} onClick={()=> setBudgetType('income')}>Income</button>
+                </div>
                 <Input
                     type="text"
                     id="inputID"
@@ -137,7 +152,7 @@ function UpdateBudget() {
                                 format="MM/dd/yyyy"
                                 value={budgetDate}
                                 onChange={handleBudgetDateChange}
-                                style={{padding:'10px',color:'white'}}
+                                style={{padding:'10px',color:'white',width:'20vw'}}
                             />
                     </ThemeProvider>
                 </MuiPickersUtilsProvider>
@@ -173,22 +188,41 @@ function UpdateBudget() {
                     isClearable
                     styles={colourStyles}
                 />
-                <div style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <div hidden={BudgetClass === 'edit'} style={{display:'flex',alignItems:'center',justifyContent:'center'}}>
                     <Button
                         size="md"
                         type='submit'
                         onClick={async (e) => {
-                            await handleAddBudget();
+                            await handleBudget();
                             window.location.reload(false);
                         }}
                         style={{color:'white',backgroundColor:'#D90166',width: '10vw',outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginBottom:'2%',marginTop:'10%',paddingTop:'1%',paddingBottom:'1%',paddingLeft:'5px',paddingRight:'5px'}}>
                     Add</Button>
                 </div>
+                <div hidden={BudgetClass === 'add'} style={{display:'flex',alignItems:'center',flexDirection:'row',justifyContent:'center'}}>
+                    <Button
+                        size="md"
+                        type='submit'
+                        onClick={async (e) => {
+                            await handleBudget();
+                            window.location.reload(false);
+                        }}
+                        style={{color:'white',backgroundColor:'#D90166',width: '10vw',outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginBottom:'2%',marginTop:'10%',paddingTop:'1%',paddingBottom:'1%',paddingLeft:'5px',paddingRight:'5px'}}>
+                    Update</Button>
+                    <Button
+                        size="md"
+                        type='submit'
+                        onClick={async (e) => {
+                            await handleRemoveBudget();
+                            window.location.reload(false);
+                        }}
+                        style={{color:'white',backgroundColor:'#D90166',width: '10vw',outline:'none',borderColor:'transparent',marginLeft:'2%',marginRight:'2%',marginBottom:'2%',marginTop:'10%',paddingTop:'1%',paddingBottom:'1%',paddingLeft:'5px',paddingRight:'5px'}}>
+                    Delete</Button>
+                </div>
             </div>
-    </div>
 )};
 export const colourStyles = {
-    control: styles => ({ ...styles, backgroundColor: 'transparent',borderColor:'transparent'}),
+    control: styles => ({ ...styles, backgroundColor: 'transparent',borderColor:'transparent',width:'20vw'}),
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
@@ -206,4 +240,4 @@ export const colourStyles = {
         fontSize:'15px'
     }),
 };
-export default UpdateBudget;
+export default UpdateBudgetReusable;

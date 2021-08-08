@@ -22,9 +22,7 @@ export const tableStyles = makeStyles(
             
         },
         '& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell': {
-          borderBottom: `1px solid gray`,
-          
-          
+          borderBottom: `1px solid gray`,   
         },
         '& .MuiPaginationItem-root': {
           borderRadius: 0,

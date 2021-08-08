@@ -24,7 +24,7 @@ export default function Total({budget, interval, index, type}) {
   }, [budget, index, interval,]);
 
   return (
-    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#28365f',height:'10vh',width:'20vw',}}>
+    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#393E46',height:'10vh',width:'20vw',}}>
         <p style = {{color:'white'}}>{type==="expense"?"Total Expenses":"Total Income"}</p>
         <p style = {{color:'white'}}>${total}</p>
     </div>

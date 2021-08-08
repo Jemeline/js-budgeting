@@ -43,7 +43,7 @@ export default function CategoryTable({budget, interval, index, categories, type
   }, [budget, index, interval,]);
 
   return (
-    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#28365f',height:'50vh',width:'40vw',}}>
+    <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#393E46',height:'50vh',width:'40vw',}}>
       <p style = {{color:'white'}}>{type==="expense"?"Top Expense Categories":"Top Income Histories"}</p>
       <div style = {{height:'45vh',display:'flex', alignItems:'center',justifyContent:'center'}}>
           <ThemeProvider theme={darkTheme}>
