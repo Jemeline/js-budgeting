@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { ThemeProvider } from '@material-ui/styles';
 import {darkTheme,tableStyles} from '../../utils/design';
+import { Modal, ModalHeader, ModalBody, Button} from 'reactstrap';
 
 
 export default function BudgetTable({budget, type}) {
   const classes = tableStyles();
   const [budgetRows, setBudgetRows] = useState([]);
   const [budgetColumns, setBudgetColumns] = useState([]);
+  const [editModal, setEditModal] = useState(false);
 
   useEffect(async () => {
     const filteredBudget = typeof(budget.data)==='undefined'?[]:budget.data.filter(ele=>ele.budgetType===type);
@@ -27,14 +29,21 @@ export default function BudgetTable({budget, type}) {
         id: ele._id,
     }}));
   }, [budget, type]);
-
+  
+  const closeBtn = <Button size="sm" onClick={()=> {setEditModal(false);}} style={{backgroundColor:"white",borderColor:"white",outline:'none'}}><strong style={{fontSize:'20px'}}>&times;</strong></Button>;
+  
   return (
     <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#28365f',height:'75vh',width:'75vw',}}>
       <p style = {{color:'white'}}>{type==="expense"?"Expense History":"Income History"}</p>
       <div style = {{display:'flex', alignItems:'center',justifyContent:'center',height:'70vh' }}>
             <ThemeProvider theme={darkTheme}>
-                <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} disableColumnMenu={true} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
+                <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} onRowClick={()=> setEditModal(true)} disableColumnMenu={true} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
             </ThemeProvider>
+            <Modal isOpen={editModal} toggle={()=> {setEditModal(false);}} style={{marginTop:'65px',width:'30vw'}}>
+                <ModalHeader toggle={()=> {setEditModal(false);}} close={closeBtn}/>
+                    <ModalBody style={{display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column'}}>
+                    </ModalBody>
+            </Modal>
       </div>
     </div>
   )
