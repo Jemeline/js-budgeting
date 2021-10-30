@@ -14,7 +14,7 @@ export default function CategoryTable({budget, interval, index, categories, type
     const filteredBudget = typeof(budget.data)==='undefined'?[]:budget.data;
     const startDate = new Date();
     const endDate = new Date();
-    const intervalList = (getDaysArray(startDate.setDate(0),endDate).map((ele)=>ele.toISOString().slice(5,10)));
+    const intervalList = (getDaysArray(startDate.setMonth(startDate.getMonth()-index,0),endDate.setMonth(endDate.getMonth()-index)).map((ele)=>ele.toISOString().slice(5,10)));
     filteredBudget.map(ele => {ele.filteredDate = new Date(ele.budgetDate).toISOString().slice(5,10)});
     let categoryList = type==="expense"?ExpenseCategories:IncomeCategories;
     categoryList.map(ele => {ele.sum = filteredBudget.filter(e => intervalList.includes(e.filteredDate) && e.budgetCategory===ele.label).reduce((sum, curr) => sum + curr.budgetAmount, 0)});
@@ -33,9 +33,9 @@ export default function CategoryTable({budget, interval, index, categories, type
   }, [budget, index, interval,]);
 
   return (
-    <div style ={{display:'flex', flexDirection:'column',alignItems:'center',justifyContent:'center',backgroundColor:'#393E46',height:10+categories*6+'vh',width:'30vw',borderRadius:'10px'}}>
+    <div style ={{display:'flex', flexDirection:'column',alignItems:'center',justifyContent:'center',backgroundColor:'#393E46',height:10+categories*6+'vh',width:'21vw',borderRadius:'10px'}}>
       <p style = {{color:'white', margin:0}}>{type==="expense"?"Top Expense Categories":"Top Income Histories"}</p>
-      <div style = {{height:'100vh',width:'29vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
+      <div style = {{height:'100vh',width:'20vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
           <ThemeProvider theme={darkTheme}>
               <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} hideFooter={true} disableColumnMenu={true} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
           </ThemeProvider>

@@ -33,24 +33,26 @@ function Home() {
                 <div style={{height:'1.5vh'}}/>
                 <RecentTransactions budget={budgetData} type={'income'} transactions={3}/>
             </div>
-            <div>
+            <div style = {{width:'30vw'}}>
                 <p style = {{color:'white', margin:0}}>Yearly</p>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row'}}>
-                    <Total budget={budgetData} interval={'Y'} type={'income'}/>        
-                    <Total budget={budgetData} interval={'Y'} type={'expense'}/>
-                    <Total budget={budgetData} interval={'Y'} type={'saving'}/>   
+                    <Total budget={budgetData} interval={'Y'} index = {0} type={'income'}/>        
+                    <Total budget={budgetData} interval={'Y'} index = {0} type={'expense'}/>
+                    <Total budget={budgetData} interval={'Y'} index = {0} type={'saving'}/>   
                 </div>
                 <p style = {{color:'white', margin:0}}>Monthly</p>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row'}}>
-                    <Total budget={budgetData} interval={'M'} type={'income'}/>        
-                    <Total budget={budgetData} interval={'M'} type={'expense'}/>
-                    <Total budget={budgetData} interval={'M'} type={'saving'}/>   
+                    <Total budget={budgetData} interval={'M'} index = {0} type={'income'}/>        
+                    <Total budget={budgetData} interval={'M'} index = {0} type={'expense'}/>
+                    <Total budget={budgetData} interval={'M'} index = {0} type={'saving'}/>   
+                </div>
+            </div>
+            <div>
+                <div style={{backgroundColor:'#393E46',borderRadius:'10px'}}>
+                <UpdateBudgetReusable BudgetClass="add"/>
                 </div>
                 <div style={{height:'2.5vh'}}/>
-                <CategoryTable budget={budgetData} categories={5} type={'expense'}/>
-            </div>
-            <div style={{backgroundColor:'#393E46'}}>
-                <UpdateBudgetReusable BudgetClass="add"/>
+                <CategoryTable budget={budgetData} categories={5} index={0} type={'expense'}/>
             </div>
             <Modal isOpen={modal} toggle={()=> {setModal(false);}} style={{marginTop:'65px',width:'30vw'}}>
                 <ModalHeader toggle={()=> {setModal(false);}} close={closeBtn}>Please Verify Your Email</ModalHeader>
