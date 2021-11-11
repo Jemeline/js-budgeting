@@ -28,7 +28,7 @@ export default function RecentTransactions({budget,transactions,type}) {
 
   return (
     <div style ={{display:'flex', flexDirection:'column',alignItems:'center',justifyContent:'center',backgroundColor:'#393E46',width:'30vw',height:10+transactions*6+'vh',borderRadius:'10px'}}>
-      <p style = {{color:'white', margin:0}}>{type==="expense"?"Recent Expenses":"Recent Income"}</p>
+      <p style = {{color:'#D90166', margin:0}}>{type==="expense"?"Recent Expenses":"Recent Income"}</p>
       <div style = {{height:'100vh',width:'29vw',display:'flex', alignItems:'center',justifyContent:'center'}}>
           <ThemeProvider theme={darkTheme}>
               <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} hideFooter={true} disableColumnMenu={true} scrollbarSize={17} autoPageSize={true} density={'compact'}/>

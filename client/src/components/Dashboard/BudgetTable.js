@@ -49,7 +49,7 @@ export default function BudgetTable({budget, type}) {
   
   return (
     <div style ={{display:'flex', flexDirection:'column',backgroundColor:'#393E46',height:'75vh',width:'75vw',}}>
-      <p style = {{color:'white'}}>{type==="expense"?"Expense History":"Income History"}</p>
+      <p style = {{color:'#D90166'}}>{type==="expense"?"Expense History":"Income History"}</p>
       <div style = {{display:'flex', alignItems:'center',justifyContent:'center',height:'70vh' }}>
             <ThemeProvider theme={darkTheme}>
                 <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} onRowClick={(row)=> handleEditBudgetRow(row.row)} disableColumnMenu={true} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>

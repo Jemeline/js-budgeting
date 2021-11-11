@@ -32,7 +32,7 @@ function Analytics() {
                     <Total budget={budgetData} interval={'M'} index = {3} type={'saving'}/>   
                 </div>
                 <div style={{height:'2.5vh'}}/>
-                <CategoryTable budget={budgetData} categories={12} index={3} type={'expense'}/>
+                <CategoryTable budget={budgetData} categories={10} index={3} type={'expense'}/>
             </div>
             <div>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row'}}>        
@@ -40,7 +40,7 @@ function Analytics() {
                     <Total budget={budgetData} interval={'M'} index = {2} type={'saving'}/>   
                 </div>
                 <div style={{height:'2.5vh'}}/>
-                <CategoryTable budget={budgetData} categories={12} index={2} type={'expense'}/>
+                <CategoryTable budget={budgetData} categories={10} index={2} type={'expense'}/>
             </div>
             <div>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row'}}>      
@@ -48,7 +48,7 @@ function Analytics() {
                     <Total budget={budgetData} interval={'M'} index = {1} type={'saving'}/>   
                 </div>
                 <div style={{height:'2.5vh'}}/>
-                <CategoryTable budget={budgetData} categories={12} index={1} type={'expense'}/>
+                <CategoryTable budget={budgetData} categories={10} index={1} type={'expense'}/>
             </div>
             <div>
                 <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row'}}>        
@@ -56,7 +56,7 @@ function Analytics() {
                     <Total budget={budgetData} interval={'M'} index = {0} type={'saving'}/>   
                 </div>
                 <div style={{height:'2.5vh'}}/>
-                <CategoryTable budget={budgetData} categories={12} index={0} type={'expense'}/>
+                <CategoryTable budget={budgetData} categories={10} index={0} type={'expense'}/>
             </div>
             <Modal isOpen={modal} toggle={()=> {setModal(false);}} style={{marginTop:'65px',width:'30vw'}}>
                 <ModalHeader toggle={()=> {setModal(false);}} close={closeBtn}>Please Verify Your Email</ModalHeader>
