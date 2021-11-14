@@ -27,7 +27,7 @@ function Home() {
 
     const closeBtn = <Button size="sm" onClick={()=> {setModal(false);}} style={{backgroundColor:"white",borderColor:"white",outline:'none'}}><strong style={{fontSize:'20px'}}>&times;</strong></Button>;
     return (
-        <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row',height:'calc(100vh-60px)'}}>
+        <div style={{display:'flex',alignItems:'center',justifyContent:'space-around',flexDirection:'row',height:'calc(100vh - 60px)'}}>
             <div>
                 <RecentTransactions budget={budgetData} type={'expense'} transactions={5}/>
                 <div style={{height:'1.5vh'}}/>

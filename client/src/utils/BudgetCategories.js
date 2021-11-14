@@ -1,16 +1,16 @@
 export const ExpenseCategories = [
-    {value:"Transportation",label:"Transportation",subcategories:['Gas','Maintenance/Oil Change','Repairs','Tires','DMV','Parking Fees','Registration','Other']},
-    {value:"Food",label:"Food",subcategories:['Groceries',"Farmers' Market"]},
-    {value:"Housing",label:"Housing",subcategories:['Rent',"Furniture","Kitchen Supplies"]},
-    {value:"Utilities",label:"Utilities",subcategories:['Internet','Water','Electricity']},
-    {value:"Social",label:"Social",subcategories:["Bars","Date Night","Eating Out","Coffee"]},
-    {value:"Health",label:"Health",subcategories:["Gym Membership", "Doctor Appointments","Pharmacy","Other"]},
-    {value:"Insurance",label:"Insurance",subcategories:["Renter Insurance","Vehicle Insurance","Medical Insurance", "Dental Insurance", "Vision Insurance"]},
-    {value:"Discretionary",label:"Discretionary",subcategories:["Hobbies","Clothing"]},
-    {value:"Vacation",label:"Vacation",subcategories:["Weddings","Food","Air Travel","Hotel"]},
-    {value:"Entertainment",label:"Entertainment",subcategories:["Subscriptions","Movies","Concert","Other"]},
-    {value:"Giving ",label:"Giving",subcategories:["Birthday", "Christmas", "Anniversary", "Other"]},
-    {value:"Other",label:"Other",subcategories:[]}
+    {color: '#9e3357', value:"Transportation",label:"Transportation",subcategories:['Gas','Maintenance/Oil Change','Repairs','Tires','DMV','Parking Fees','Registration','Other']},
+    {color: '#c0cd1d', value:"Food",label:"Food",subcategories:['Groceries',"Farmers' Market"]},
+    {color: '#a56543', value:"Housing",label:"Housing",subcategories:['Rent',"Furniture","Kitchen Supplies"]},
+    {color: '#12d876', value:"Utilities",label:"Utilities",subcategories:['Internet','Water','Electricity']},
+    {color: '#23e9df', value:"Social",label:"Social",subcategories:["Bars","Date Night","Eating Out","Coffee"]},
+    {color: '#bd5135', value:"Health",label:"Health",subcategories:["Gym Membership", "Doctor Appointments","Pharmacy","Other"]},
+    {color: '#9d87bd', value:"Insurance",label:"Insurance",subcategories:["Renter Insurance","Vehicle Insurance","Medical Insurance", "Dental Insurance", "Vision Insurance"]},
+    {color: '#1fc4d7', value:"Discretionary",label:"Discretionary",subcategories:["Hobbies","Clothing"]},
+    {color: '#ba9913', value:"Vacation",label:"Vacation",subcategories:["Weddings","Food","Air Travel","Hotel"]},
+    {color: '#d12f95', value:"Entertainment",label:"Entertainment",subcategories:["Subscriptions","Movies","Concert","Other"]},
+    {color: '#d4bbc8', value:"Giving ",label:"Giving",subcategories:["Birthday", "Christmas", "Anniversary", "Other"]},
+    {color: '#0319e7', value:"Other",label:"Other",subcategories:[]}
 ];
 
 export const IncomeCategories = [

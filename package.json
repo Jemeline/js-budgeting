@@ -8,13 +8,14 @@
   "main": "db.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "crypto": "^1.0.1",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^9.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.1",
     "mongoose": "^5.12.7",
     "nodemailer": "^6.6.0",
+    "nodemon": "^2.0.15",
     "path": "^0.12.7"
   },
   "devDependencies": {},

@@ -18,20 +18,18 @@ export default function CategoryTable({budget, interval, index, categories, type
     const endDate = new Date(today.getFullYear(),today.getMonth()-index+1,0)
     const intervalList = (getDaysArray(startDate,endDate).map((ele)=>ele.toISOString().slice(5,10)));
     filteredBudget.map(ele => {ele.filteredDate = new Date(ele.budgetDate).toISOString().slice(5,10)});
-    let categoryList = type==="expense"?ExpenseCategories:IncomeCategories;
-    categoryList.map(ele => {ele.sum = filteredBudget.filter(e => intervalList.includes(e.filteredDate) && e.budgetCategory===ele.label).reduce((sum, curr) => sum + curr.budgetAmount, 0)});
-    categoryList.sort(function (a, b) {return b.sum - a.sum;});
-    const reducedCategoryList = categoryList.slice(0,categories);
+    const categoryList = type==="expense"?ExpenseCategories.map(e=>e.value):IncomeCategories(e=>e.value);
+    const categoryTotals = categoryList.map(categoryEle => {
+      const sum = filteredBudget.filter(e => intervalList.includes(e.filteredDate) && e.budgetCategory===categoryEle).reduce((sum, curr) => sum + curr.budgetAmount, 0);
+      return {category: categoryEle, amount: sum.toFixed(2), id: categoryEle}
+    });
+    const reducedCategoryList = categoryTotals.sort(function (a, b) {return b.amount - a.amount;}).slice(0,categories);
 
     setBudgetColumns([
         { field: 'category', headerName: 'Category', flex: 0.5},
         { field: 'amount', headerName: 'Amount ($)', flex: 0.5},
         ]);
-    setBudgetRows(reducedCategoryList.map(ele=> {return {  
-        category: ele.value, 
-        amount: ele.sum.toFixed(2),
-        id: ele.label,
-    }}));
+    setBudgetRows(reducedCategoryList);
   }, [budget, index, interval,]);
 
   return (
