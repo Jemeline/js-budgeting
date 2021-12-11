@@ -38,11 +38,12 @@ export const getWeeksArray = function(start, end) {
     return [...new Set(arr)];
 };
 export const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-export const getMonthsArray = function(end) {
-    for (var i = 0, arr = [], month = new Date(end).getMonth()+1; i < 12; i++) {
+export const getMonthsArray = function() {
+    var month = new Date().getMonth()+1;
+    for (var i = 0, arr = []; i <= 11; i++) {
+        month>11?month=0:month=month;
         arr.push(monthNames[month]);
         month++;
-        month>11?month=0:month=month;
     }
     return arr;
 };

@@ -17,7 +17,12 @@ export default function CategoryTable({budget, interval, index, categories, type
     const startDate = new Date(today.getFullYear(),today.getMonth()-index,1);
     const endDate = new Date(today.getFullYear(),today.getMonth()-index+1,0)
     const intervalList = (getDaysArray(startDate,endDate).map((ele)=>ele.toISOString().slice(5,10)));
-    filteredBudget.map(ele => {ele.filteredDate = new Date(ele.budgetDate).toISOString().slice(5,10)});
+    filteredBudget.map(ele => {
+      return {
+        ...ele,
+        filteredDate: new Date(ele.budgetDate).toISOString().slice(5,10)
+      }
+    });
     const categoryList = type==="expense"?ExpenseCategories.map(e=>e.value):IncomeCategories(e=>e.value);
     const categoryTotals = categoryList.map(categoryEle => {
       const sum = filteredBudget.filter(e => intervalList.includes(e.filteredDate) && e.budgetCategory===categoryEle).reduce((sum, curr) => sum + curr.budgetAmount, 0);

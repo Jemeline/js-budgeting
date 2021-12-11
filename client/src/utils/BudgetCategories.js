@@ -9,7 +9,7 @@ export const ExpenseCategories = [
     {color: '#1fc4d7', value:"Discretionary",label:"Discretionary",subcategories:["Hobbies","Clothing"]},
     {color: '#ba9913', value:"Vacation",label:"Vacation",subcategories:["Weddings","Food","Air Travel","Hotel"]},
     {color: '#d12f95', value:"Entertainment",label:"Entertainment",subcategories:["Subscriptions","Movies","Concert","Other"]},
-    {color: '#d4bbc8', value:"Giving ",label:"Giving",subcategories:["Birthday", "Christmas", "Anniversary", "Other"]},
+    {color: '#d4bbc8', value:"Giving",label:"Giving",subcategories:["Birthday", "Christmas", "Anniversary", "Other"]},
     {color: '#0319e7', value:"Other",label:"Other",subcategories:[]}
 ];
 

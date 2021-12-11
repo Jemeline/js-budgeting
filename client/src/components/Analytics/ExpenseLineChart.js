@@ -27,7 +27,8 @@ export default function ExpenseLineChart({budget, type}) {
     };
   useEffect(async () => {
     const filteredBudget = typeof(budget.data)==='undefined'?[]:budget.data.filter(ele => ele.budgetType===type);
-    const intervalList = typeof(budget.data)==='undefined'?[]:getMonthsArray(new Date());
+    const intervalList = typeof(budget.data)==='undefined'?[]:getMonthsArray();
+    console.log(intervalList);
     filteredBudget.map(ele=>{ele.filteredDate = monthNames[new Date(ele.budgetDate).getMonth()]});
     const totals = intervalList.map(monthEle => {
         const sum = filteredBudget.filter(e => e.filteredDate===monthEle).reduce((sum, curr) => sum + curr.budgetAmount, 0);
