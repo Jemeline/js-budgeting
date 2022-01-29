@@ -1,0 +1,57 @@
+@use "sass:map";
+@import "./variables.scss";
+
+$grid-breakpoints: (
+    xs: 380px,
+    sm: 576px,
+    md: 700px,
+    lg: 1100px,
+    xl: 1600px,
+    xxl: 2100px,
+    xxxl: 2400px,
+);
+@import "../../node_modules//bootstrap";
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+  
+ #inputID::placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.App {
+    text-align: center;
+}
+
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.display-below-md { display: none; }
+@media (max-width: map.get($grid-breakpoints, "md")) {
+    .display-below-md {
+        display: inline;
+    }
+    .display-above-md {display: none; }
+}
+
+  

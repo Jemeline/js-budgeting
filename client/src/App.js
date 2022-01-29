@@ -1,12 +1,11 @@
 import React from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter} from 'react-router-dom';
+import './scss/App.scss';
+import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/routes';
 
 function App() {
   document.title = "JS Budgeting";
-  document.body.style = 'background: #222831;';
+  document.body.style = 'background: #000109';
 
   return (
     <div className="App">
