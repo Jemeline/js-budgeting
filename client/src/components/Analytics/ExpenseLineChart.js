@@ -61,8 +61,6 @@ export default function ExpenseLineChart({budget, type}) {
 
   return (
     <div style = {{display:'flex',justifyContent:'center'}}>
-      <div style = {{height:'60vh',width:'85vw',display:'flex', justifyContent:'center'}}>
         <Line data={data} options={options}/>
-      </div>
     </div>
   )};

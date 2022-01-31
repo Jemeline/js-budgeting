@@ -46,12 +46,33 @@ code {
     color: white;
 }
 
+.display-below-sm { display: none; }
+@media (max-width: map.get($grid-breakpoints, "sm")) {
+    .display-below-sm { display: inline; }
+    .display-above-sm {display: none; }
+}
+
+.display-only-sm { display: none; }
+@media (max-width: map.get($grid-breakpoints, "sm")) {
+    .display-only-sm { display: inline; }
+    .display-below-sm { display: none; }
+    .display-above-sm {display: none; }
+    .display-below-md { display: none; }
+    .display-above-md {display: none; }
+    .display-below-lg { display: inline; }
+    .display-above-lg {display: none; }
+}
+
 .display-below-md { display: none; }
 @media (max-width: map.get($grid-breakpoints, "md")) {
-    .display-below-md {
-        display: inline;
-    }
+    .display-below-md { display: inline; }
     .display-above-md {display: none; }
+}
+
+.display-below-lg { display: none; }
+@media (max-width: map.get($grid-breakpoints, "lg")) {
+    .display-below-lg { display: inline; }
+    .display-above-lg {display: none; }
 }
 
   

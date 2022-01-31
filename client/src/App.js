@@ -5,7 +5,7 @@ import Routes from './routes/routes';
 
 function App() {
   document.title = "JS Budgeting";
-  document.body.style = 'background: #000109';
+  document.body.style = 'background: #000102';
 
   return (
     <div className="App">
