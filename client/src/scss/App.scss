@@ -2,7 +2,7 @@
 @import "./variables.scss";
 
 $grid-breakpoints: (
-    xs: 380px,
+    xs: 360px,
     sm: 576px,
     md: 700px,
     lg: 1100px,
@@ -52,15 +52,24 @@ code {
     .display-above-sm {display: none; }
 }
 
+.display-only-xs { display: none; }
+@media only screen and (min-width: map.get($grid-breakpoints, "xs")) and (max-width:  (map.get($grid-breakpoints, "sm")-1))  {
+    .display-only-xs { display: inline; }
+}
+
 .display-only-sm { display: none; }
-@media (max-width: map.get($grid-breakpoints, "sm")) {
+@media only screen and (min-width: map.get($grid-breakpoints, "sm")) and (max-width:  (map.get($grid-breakpoints, "md")-1))  {
     .display-only-sm { display: inline; }
-    .display-below-sm { display: none; }
-    .display-above-sm {display: none; }
-    .display-below-md { display: none; }
-    .display-above-md {display: none; }
-    .display-below-lg { display: inline; }
-    .display-above-lg {display: none; }
+}
+
+.display-only-md { display: none; }
+@media only screen and (min-width: map.get($grid-breakpoints, "md")) and (max-width:  (map.get($grid-breakpoints, "lg")-1))  {
+    .display-only-md { display: inline; }
+}
+
+.display-only-lg { display: none; }
+@media only screen and (min-width: map.get($grid-breakpoints, "lg")) and (max-width:  (map.get($grid-breakpoints, "xl")-1))  {
+    .display-only-lg { display: inline; }
 }
 
 .display-below-md { display: none; }
@@ -75,4 +84,9 @@ code {
     .display-above-lg {display: none; }
 }
 
+.display-below-xl { display: none; }
+@media (max-width: map.get($grid-breakpoints, "xl")) {
+    .display-below-xl { display: inline; }
+    .display-above-xl {display: none; }
+}
   

@@ -23,9 +23,28 @@ function AnalyticsChart({budget, type, color}) {
     }, [budget]);
 
     return (
-        <>
-            <div className="display-only-sm">
-                <div class="container-fluid rounded-3" style={{backgroundColor : "rgba(53,55,78,0.4)", width: "100%", height: "400px"}}>
+        // <>
+        //     <div className="display-below-md">
+        //         <div class="container-fluid rounded-3" style={{backgroundColor : "rgba(53,55,78,0.4)", width: "100%", height: "100%"}}>
+        //             <ResponsiveContainer width="100%" height="100%">
+        //                 <LineChart
+        //                     width={100}
+        //                     height={100}
+        //                     data={data}
+        //                     margin={{
+        //                         top: 20,
+        //                         right: 15,
+        //                         left: 15,
+        //                         bottom: 20,
+        //                     }}
+        //                 >
+        //                     <Line type="monotone" stroke={color} dataKey="pv" strokeWidth={2} dot={{fill: color, stroke: color, strokeWidth: 2 }} />
+        //                 </LineChart>
+        //             </ResponsiveContainer>
+        //         </div>
+        //     </div>
+        //     <div className="display-only-md">
+                <div class="container-fluid rounded-3" style={{backgroundColor : "rgba(53,55,78,0.4)", width: "100%", height: "100%"}}>
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart
                             width={100}
@@ -42,8 +61,8 @@ function AnalyticsChart({budget, type, color}) {
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
-            </div>
-        </>
+    //         </div>
+    //     </>
     )
 };
 
