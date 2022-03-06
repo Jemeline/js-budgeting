@@ -3,7 +3,8 @@ import { getMonthsArray, monthNames } from '../utils/common';
 import { ExpenseCategories, IncomeCategories } from '../utils/BudgetCategories';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
-function AnalyticsPieChart({ budget, type, color }) {
+function AnalyticsPieChart({ budget, totalsByCategory, type, color }) {
+    // console.log(totalsByCategory)
     const data = [
         { name: 'Group A', value: 400 },
         { name: 'Group B', value: 300 },
@@ -11,7 +12,7 @@ function AnalyticsPieChart({ budget, type, color }) {
         { name: 'Group D', value: 200 },
     ];
     
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042','#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
     return (
         // <>
@@ -20,17 +21,17 @@ function AnalyticsPieChart({ budget, type, color }) {
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart width={100} height={100}>
                             <Pie
-                                data={data}
+                                data={totalsByCategory}
                                 cx={"50%"}
                                 cy={"50%"}
                                 innerRadius={"50%"}
                                 outerRadius={"70%"}
                                 fill="#8884d8"
-                                paddingAngle={5}
-                                dataKey="value"
+                                paddingAngle={3}
+                                dataKey="total"
                             >
                                 {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke={COLORS[index % COLORS.length]} />
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke={"transparent"} />
                                 ))}
                             </Pie>
                         </PieChart>

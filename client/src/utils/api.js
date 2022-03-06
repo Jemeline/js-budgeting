@@ -89,3 +89,24 @@ export async function apiGetBudgetByUser(id) {
         throw error;
     }    
 };
+
+
+export async function apiBudgetTotalExpenses(id,payload) {
+    try { 
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/budget-total-expenses/${id}`, payload);
+        return res;
+    } catch (error){
+        console.log(error);
+        throw error;
+    }    
+};
+
+export async function apiExpensesByCategory(id,payload) {
+    try { 
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/budget-expenses-by-category/${id}`, payload);
+        return res;
+    } catch (error){
+        console.log(error);
+        throw error;
+    }    
+};

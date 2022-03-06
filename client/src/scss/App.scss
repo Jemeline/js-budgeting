@@ -34,7 +34,6 @@ code {
     text-align: center;
 }
 
-
 .App-header {
     background-color: #282c34;
     min-height: 100vh;
@@ -89,4 +88,110 @@ code {
     .display-below-xl { display: inline; }
     .display-above-xl {display: none; }
 }
+
+.accent {
+    color: $accent;
+}
+
+.modal {
+    background-color: transparent !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.modal-sm .modal-body {
+    padding: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-sm .modal-content {
+    background-color: transparent !important;
+    border: 0px solid transparent !important;
+    border-radius: 12px;
+    width: 35%;
+    min-width: 350px;
+    max-width: 550px;
+}
+
+.modal-sm {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(90vh);
+}
+
+.custom-calendar, .Calendar__monthSelector, .Calendar__yearSelector {
+    background-color: $dark-bg-modal !important;
+}
+
+.Calendar__monthText, .Calendar__yearText, .Calendar__day {
+    color: $accent !important;
+}
+
+.Calendar__monthYear.-shown > *:hover {
+    background-color: $dark-bg-modal !important;
+}
   
+.Calendar__monthSelectorItemText, .Calendar__yearSelectorText {
+    color: $text;
+}
+
+.Calendar__monthSelectorItemText:disabled {
+    color: gray;
+}
+
+.Calendar__monthSelectorItem.-active .Calendar__monthSelectorItemText, .Calendar__yearSelectorItem.-active .Calendar__yearSelectorText {
+    background-color: $accent !important;
+}
+
+.Calendar__monthSelectorItem:not(.-active) .Calendar__monthSelectorItemText:not(:disabled):hover {
+    background-color: $dark-bg-modal !important;
+    color: $text !important;
+}
+
+.Calendar__yearSelectorItem:not(.-active) .Calendar__yearSelectorText:not(:disabled):hover {
+    background-color: $dark-bg-modal !important;
+    color: $text !important;
+}
+
+.Calendar__yearSelectorWrapper.-faded::after, .Calendar__yearSelectorWrapper.-faded::before {
+    opacity: 0 !important;
+    z-index: inherit !important;
+}
+
+.Calendar__day:not(.-selectedBetween) {
+    color: $light-text !important;
+}
+
+.Calendar__day:not(.-selectedStart):not(.-selectedEnd):not(.-selectedBetween) {
+    color: $text;
+}
+
+.Calendar__day.-selected, .Calendar__day.-selectedStart, .Calendar__day.-selectedEnd, .Calendar__day:hover  {
+    background-color: $accent !important;
+}
+
+.Calendar__day.-selectedBetween  {
+    background-color: $accent-transparent !important;
+    color: white !important;
+}
+
+.custom-today {
+    color: white !important;
+    border: 1px solid $accent !important;
+}
+
+.custom-day-today::after {
+    visibility: hidden;
+}
+
+abbr[title] {
+    border-bottom: none !important;
+    cursor: inherit !important;
+    text-decoration: none !important;
+}

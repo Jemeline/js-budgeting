@@ -25,7 +25,7 @@ const BudgetSchema = new mongoose.Schema({
         type: String,
     },
     budgetDescription:{
-        type:String,
+        type: String,
         required: [true, "Description required"],
     },
   });
