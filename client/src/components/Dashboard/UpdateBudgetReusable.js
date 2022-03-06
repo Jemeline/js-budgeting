@@ -93,7 +93,7 @@ function UpdateBudgetReusable({BudgetType,BudgetDescription,BudgetAmount,BudgetD
                     _userId:sessionStorage.getItem('id'),
                     budgetType:budgetType,
                     budgetAmount:budgetAmount,
-                    budgetDate:getFormattedDate(budgetDate),
+                    budgetDate:budgetDate,
                     budgetCategory:budgetCategory.label,
                     budgetDescription:budgetDescription,
                     budgetSubcategory:budgetSubcategory.label,
