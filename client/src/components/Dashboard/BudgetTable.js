@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import moment from 'moment';
 import { DataGrid } from '@material-ui/data-grid';
 import { ThemeProvider } from '@material-ui/styles';
 import {darkTheme,tableStyles} from '../../utils/design';
@@ -30,6 +31,7 @@ export default function BudgetTable({budget, type}) {
 
   useEffect(async () => {
     const filteredBudget = typeof(budget.data)==='undefined'?[]:budget.data.filter(ele=>ele.budgetType===type);
+    filteredBudget.sort((a,b)=>new Date(a.budgetDate)-new Date(b.budgetDate)).reverse();
     setBudgetColumns([
         { field: 'date', headerName: 'Date', flex: 0.125},
         { field: 'description', headerName: 'Description', flex: 0.225},
@@ -38,7 +40,7 @@ export default function BudgetTable({budget, type}) {
         { field: 'amount', headerName: 'Amount ($)', flex: 0.175},
         ]);
     setBudgetRows(filteredBudget.map(ele=> {return {  
-        date: ele.budgetDate,
+        date: moment(ele.budgetDate).format('MMMM D YYYY'),
         description: ele.budgetDescription,
         category: ele.budgetCategory, 
         subcategory: ele.budgetSubcategory,
@@ -52,7 +54,7 @@ export default function BudgetTable({budget, type}) {
       <p style = {{color:'#D90166'}}>{type==="expense"?"Expense History":"Income History"}</p>
       <div style = {{display:'flex', alignItems:'center',justifyContent:'center',height:'70vh' }}>
             <ThemeProvider theme={darkTheme}>
-                <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} onRowClick={(row)=> handleEditBudgetRow(row.row)} disableColumnMenu={true} sortModel={[{field: 'date', sort: 'desc',}]} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
+                <DataGrid className={classes.root} rows={budgetRows} columns={budgetColumns} onRowClick={(row)=> handleEditBudgetRow(row.row)} disableColumnMenu={true} scrollbarSize={17} autoPageSize={true} density={'compact'}/>
             </ThemeProvider>
             <Modal isOpen={editModal} toggle={()=> {setEditModal(false);}} style={{width:'25vw'}}>
               <ModalHeader style={{backgroundColor:'#263859',width:'25vw'}}>Edit {capitalizeFirst(type)}</ModalHeader>

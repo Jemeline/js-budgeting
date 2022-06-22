@@ -1,3 +1,4 @@
+import moment from 'moment';
 require("dotenv").config();
 
 export function logout() {
@@ -39,10 +40,17 @@ export const getWeeksArray = function(start, end) {
 };
 export const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 export const getMonthsArray = function() {
-    var month = new Date().getMonth()+1;
+    var month = moment().month() + 1;
+    var year = moment().year() - 1;
     for (var i = 0, arr = []; i <= 11; i++) {
-        month>11?month=0:month=month;
-        arr.push(monthNames[month]);
+        if (month > 11) {
+            month = 0;
+            year++;
+        }
+        arr.push({
+            month: month,
+            year: year
+        });
         month++;
     }
     return arr;

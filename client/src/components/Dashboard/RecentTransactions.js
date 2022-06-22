@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import moment from 'moment';
 import {DataGrid} from '@material-ui/data-grid';
 import { ThemeProvider } from '@material-ui/styles';
 import {darkTheme,tableStyles} from '../../utils/design';
@@ -18,8 +19,8 @@ export default function RecentTransactions({budget,transactions,type}) {
         { field: 'description', headerName: 'Description', flex: 0.5},
         { field: 'amount', headerName: 'Amount ($)', flex: 0.5},
         ]);
-    setBudgetRows(reducedBudget.map(ele=> {return {  
-        date: ele.budgetDate,
+    setBudgetRows(reducedBudget.map(ele => {return {
+        date: moment(ele.budgetDate).format('MMMM D YYYY'),
         description: ele.budgetDescription, 
         amount: ele.budgetAmount.toFixed(2),
         id: ele._id,

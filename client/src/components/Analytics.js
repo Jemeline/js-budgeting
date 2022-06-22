@@ -1,7 +1,5 @@
 import React, {useState,useEffect} from 'react';
-import { Modal, ModalHeader, ModalBody, Button} from 'reactstrap';
-import {apiGetUser,apiGetBudgetByUser} from '../utils/api';
-import VerifyEmail from './Authentication/VerifyEmail';
+import {apiGetBudgetByUser} from '../utils/api';
 import ExpenseLineChart from './Analytics/ExpenseLineChart';
 
 function Analytics() {
