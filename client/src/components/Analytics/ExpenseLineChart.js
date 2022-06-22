@@ -4,14 +4,6 @@ import { Line } from 'react-chartjs-2';
 import {getMonthsArray, monthNames} from '../../utils/common';
 import { ExpenseCategories } from '../../utils/BudgetCategories';
 
-function filterByMonth(budgetData, month) {
-    budgetData.filter((ele) => moment(ele.budgetDate).month() === month);
-}
-
-function filterAndSumByCategory(budgetData, category) {
-    budgetData.filter((ele) => ele.budgetCategory === category.value).reduce((sum, curr) => sum + curr.budgetAmount, 0);
-}
-
 export default function ExpenseLineChart({budget, type}) {
     const [data, setData] = useState([]);
     const options = {
@@ -46,8 +38,6 @@ export default function ExpenseLineChart({budget, type}) {
             });
             return {month: monthNames[interval.month], total: sum, categoryTotals: categoryTotals};
         });
-        console.log(intervalList);
-        console.log(totals)
         const datasets = ExpenseCategories.map(categoryEle=> {
             return {
                 label: categoryEle.value, 
