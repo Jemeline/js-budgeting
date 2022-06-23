@@ -16,7 +16,6 @@
     "bootstrap": "^5.0.0",
     "chart.js": "^3.6.0",
     "date-fns": "^2.22.1",
-    "dotenv": "^9.0.0",
     "moment": "^2.29.3",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
@@ -35,11 +34,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
   },
   "browserslist": {
     "production": [
