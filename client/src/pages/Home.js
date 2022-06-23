@@ -3,11 +3,11 @@ import {
   Modal, ModalHeader, ModalBody, Button,
 } from 'reactstrap';
 import { apiGetUser, apiGetBudgetByUser } from '../utils/api';
-import VerifyEmail from './Authentication/VerifyEmail';
-import CategoryTable from './Dashboard/CategoryTable';
-import RecentTransactions from './Dashboard/RecentTransactions';
-import UpdateBudgetReusable from './Dashboard/UpdateBudgetReusable';
-import Total from './Dashboard/Total';
+import VerifyEmail from '../components/Authentication/VerifyEmail';
+import CategoryTable from '../components/Tables/CategoryTable';
+import RecentTransactions from '../components/Tables/RecentTransactions';
+import UpdateBudgetReusable from '../components/Dashboard/UpdateBudgetReusable';
+import Total from '../components/Dashboard/Total';
 
 function Home() {
   const [modal, setModal] = useState(false);

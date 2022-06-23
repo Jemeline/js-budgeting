@@ -3,11 +3,11 @@ import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Login from '../components/Authentication/Login';
 import Register from '../components/Authentication/Register';
-import Home from '../components/Home';
-import Expenses from '../components/Expenses';
-import Income from '../components/Income';
+import Home from '../pages/Home';
+import Expenses from '../pages/Expenses';
+import Income from '../pages/Income';
 import VerifyEmail from '../components/Authentication/VerifyEmail';
-import Analytics from '../components/Analytics';
+import Analytics from '../pages/Analytics';
 
 function Routes() {
   return (

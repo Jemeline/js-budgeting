@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { logout } from '../../utils/common';
+import { logout } from '../utils/common';
 
 export default function Navigation() {
   const history = useHistory();

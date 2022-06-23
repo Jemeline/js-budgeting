@@ -4,8 +4,11 @@ import { Line } from 'react-chartjs-2';
 import { getMonthsArray, monthNames } from '../../utils/common';
 import { ExpenseCategories } from '../../utils/BudgetCategories';
 
-export default function ExpenseLineChart({ budget, type }) {
-  const [data, setData] = useState([]);
+function ExpenseLineChart({ budget, type }) {
+  const [data, setData] = useState({
+    labels: [],
+    datasets: [],
+  });
   const options = {
     responsive: true,
     maintainAspectRatio: false,
@@ -69,3 +72,5 @@ export default function ExpenseLineChart({ budget, type }) {
     </div>
   );
 }
+
+export default ExpenseLineChart;

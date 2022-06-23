@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiGetBudgetByUser } from '../utils/api';
-import ExpenseLineChart from './Analytics/ExpenseLineChart';
+import ExpenseLineChart from '../components/Graphs/ExpenseLineChart';
 
 function Analytics() {
   const [budgetData, setBudgetData] = useState({});

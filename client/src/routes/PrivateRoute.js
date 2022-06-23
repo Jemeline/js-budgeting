@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import Header from '../components/Navigation/Header';
+import Header from '../components/Header';
 
 function PrivateRoute({ component: Component, ...path }) {
   return (

@@ -3,10 +3,10 @@ import moment from 'moment';
 import { DataGrid } from '@material-ui/data-grid';
 import { ThemeProvider } from '@material-ui/styles';
 import {
-  Modal, ModalHeader, ModalBody, Button, ModalFooter,
+  Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 import { darkTheme, tableStyles } from '../../utils/design';
-import UpdateBudgetReusable from './UpdateBudgetReusable';
+import UpdateBudgetReusable from '../Dashboard/UpdateBudgetReusable';
 import { capitalizeFirst } from '../../utils/common';
 
 export default function BudgetTable({ budget, type }) {

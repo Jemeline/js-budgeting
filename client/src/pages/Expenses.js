@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { apiGetBudgetByUser } from '../utils/api';
-import BudgetTable from './Dashboard/BudgetTable';
+import BudgetTable from '../components/Tables/BudgetTable';
 
 function Home() {
   const [budgetData, setBudgetData] = useState({});
