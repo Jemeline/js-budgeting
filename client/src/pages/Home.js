@@ -2,26 +2,26 @@ import React, { useState, useEffect } from 'react';
 import {
   Modal, ModalHeader, ModalBody, Button,
 } from 'reactstrap';
-import { apiGetUser, apiGetBudgetByUser } from '../utils/api';
+import { apiGetUser } from '../utils/api';
 import VerifyEmail from '../components/Authentication/VerifyEmail';
 import CategoryTable from '../components/Tables/CategoryTable';
 import RecentTransactions from '../components/Tables/RecentTransactions';
 import UpdateBudgetReusable from '../components/Dashboard/UpdateBudgetReusable';
 import Total from '../components/Dashboard/Total';
+import { useBudgetState } from '../contexts/BudgetContext';
 
 function Home() {
   const [modal, setModal] = useState(false);
-  const [budgetData, setBudgetData] = useState({});
+  const budgetData = useBudgetState();
   const id = sessionStorage.getItem('id');
 
-  useEffect(async () => {
+  useEffect(() => {
     try {
-      const user = await apiGetUser(id);
-      if (!user.data.isVerified) {
-        setModal(true);
-      }
-      const budget = await apiGetBudgetByUser(id);
-      setBudgetData(budget);
+      apiGetUser(id).then((user) => {
+        if (!user.data.isVerified) {
+          setModal(true);
+        }
+      });
     } catch (err) {
       console.log(err);
     }

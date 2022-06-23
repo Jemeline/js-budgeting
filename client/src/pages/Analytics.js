@@ -1,19 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { apiGetBudgetByUser } from '../utils/api';
+import React from 'react';
 import ExpenseLineChart from '../components/Graphs/ExpenseLineChart';
+import { useBudgetState } from '../contexts/BudgetContext';
 
 function Analytics() {
-  const [budgetData, setBudgetData] = useState({});
-  const id = sessionStorage.getItem('id');
-
-  useEffect(async () => {
-    try {
-      const budget = await apiGetBudgetByUser(id);
-      setBudgetData(budget);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
+  const budgetData = useBudgetState();
 
   return (
     <div style={{
