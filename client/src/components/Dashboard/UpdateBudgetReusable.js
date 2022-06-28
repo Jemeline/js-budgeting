@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, FormFeedback, Input } from 'reactstrap';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -11,9 +11,8 @@ import Collapse from '@material-ui/core/Collapse';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { apiAddBudget, apiUpdateBudget, apiRemoveBudget } from '../../utils/api';
-import { getFormattedDate } from '../../utils/common';
 import { ExpenseCategories, IncomeCategories } from '../../utils/BudgetCategories';
+import { useBudgetActions } from '../../contexts/BudgetContext';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -33,6 +32,7 @@ function UpdateBudgetReusable({
   const [alertBudget, setAlertBudget] = useState(false);
   const [alertBudgetMessage, setAlertBudgetMessage] = useState('');
   const [alertBudgetSeverity, setAlertBudgetSeverity] = useState('error');
+  const [addBudget, updateBudget, removeBudget] = useBudgetActions();
 
   const handleBudgetDateChange = (date) => {
     setBudgetDate(date);
@@ -96,10 +96,10 @@ function UpdateBudgetReusable({
           budgetSubcategory: budgetSubcategory.label,
         };
         if (BudgetClass === 'add') {
-          const data = await apiAddBudget(payload);
+          addBudget(payload);
           clearBudgetForm();
         } else {
-          const data = await apiUpdateBudget(BudgetId, payload);
+          updateBudget(BudgetId, payload);
         }
       }
     } catch (error) {
@@ -111,7 +111,7 @@ function UpdateBudgetReusable({
   async function handleRemoveBudget() {
     try {
       resetAlert();
-      const data = await apiRemoveBudget(BudgetId);
+      removeBudget(BudgetId);
     } catch (error) {
       console.log(error);
       raiseAlert('Something went wrong...', 'error');
@@ -215,7 +215,6 @@ function UpdateBudgetReusable({
           type="submit"
           onClick={async (e) => {
             await handleBudget();
-            window.location.reload(false);
           }}
           style={{
             color: 'white', backgroundColor: '#D90166', width: '10vw', outline: 'none', borderColor: 'transparent', marginLeft: '2%', marginRight: '2%', marginBottom: '2%', marginTop: '10%', paddingTop: '1%', paddingBottom: '1%', paddingLeft: '5px', paddingRight: '5px',
@@ -235,7 +234,6 @@ function UpdateBudgetReusable({
           type="submit"
           onClick={async (e) => {
             await handleBudget();
-            window.location.reload(false);
           }}
           style={{
             color: 'white', backgroundColor: '#D90166', width: '10vw', outline: 'none', borderColor: 'transparent', marginLeft: '2%', marginRight: '2%', marginBottom: '2%', marginTop: '10%', paddingTop: '1%', paddingBottom: '1%', paddingLeft: '5px', paddingRight: '5px',
@@ -248,7 +246,6 @@ function UpdateBudgetReusable({
           type="submit"
           onClick={async (e) => {
             await handleRemoveBudget();
-            window.location.reload(false);
           }}
           style={{
             color: 'white', backgroundColor: '#D90166', width: '10vw', outline: 'none', borderColor: 'transparent', marginLeft: '2%', marginRight: '2%', marginBottom: '2%', marginTop: '10%', paddingTop: '1%', paddingBottom: '1%', paddingLeft: '5px', paddingRight: '5px',

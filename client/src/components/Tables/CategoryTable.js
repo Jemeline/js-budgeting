@@ -13,7 +13,7 @@ export default function CategoryTable({
   const [budgetColumns, setBudgetColumns] = useState([]);
 
   useEffect(async () => {
-    const filteredBudget = typeof (budget.data) === 'undefined' ? [] : budget.data;
+    const filteredBudget = typeof (budget) === 'undefined' ? [] : budget;
     const today = new Date();
     const startDate = new Date(today.getFullYear(), today.getMonth() - index, 1);
     const endDate = new Date(today.getFullYear(), today.getMonth() - index + 1, 0);

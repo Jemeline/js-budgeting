@@ -8,17 +8,21 @@ import Expenses from '../pages/Expenses';
 import Income from '../pages/Income';
 import VerifyEmail from '../components/Authentication/VerifyEmail';
 import Analytics from '../pages/Analytics';
+import { BudgetProvider } from '../contexts/BudgetContext';
 
 function Routes() {
   return (
     <Switch>
       <Route exact path="/register" render={() => (<Register />)} />
       <Route exact path="/login" render={() => (<Login />)} />
-      <PrivateRoute exact path="/" component={Home} />
-      <PrivateRoute exact path="/expenses" component={Expenses} />
-      <PrivateRoute exact path="/income" component={Income} />
-      <PrivateRoute exact path="/analytics" component={Analytics} />
-      <PrivateRoute exact path="/verify" component={VerifyEmail} />
+
+      <BudgetProvider>
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute exact path="/expenses" component={Expenses} />
+        <PrivateRoute exact path="/income" component={Income} />
+        <PrivateRoute exact path="/analytics" component={Analytics} />
+        <PrivateRoute exact path="/verify" component={VerifyEmail} />
+      </BudgetProvider>
     </Switch>
   );
 }

@@ -30,8 +30,8 @@ function ExpenseLineChart({ budget, type }) {
     },
   };
   useEffect(() => {
-    if (typeof (budget.data) !== 'undefined') {
-      const filteredBudget = budget.data.filter((ele) => ele.budgetType === type);
+    if (typeof (budget) !== 'undefined') {
+      const filteredBudget = budget.filter((ele) => ele.budgetType === type);
       const intervalList = getMonthsArray();
       const totals = intervalList.map((interval) => {
         const sum = filteredBudget.filter((e) => moment(e.budgetDate).month() === interval.month && moment(e.budgetDate).year() === interval.year).reduce((sum, curr) => sum + curr.budgetAmount, 0);

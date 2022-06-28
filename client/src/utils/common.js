@@ -1,7 +1,5 @@
 import moment from 'moment';
 
-require('dotenv').config();
-
 export function logout() {
   sessionStorage.removeItem('id');
 }
