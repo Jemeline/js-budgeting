@@ -12,7 +12,7 @@ import { useUserState } from '../contexts/UserContext';
 
 function Home() {
   const [modal, setModal] = useState(false);
-  const budgetData = useBudgetState();
+  const { budget } = useBudgetState();
   const user = useUserState();
 
   useEffect(() => {
@@ -28,9 +28,9 @@ function Home() {
     }}
     >
       <div>
-        <RecentTransactions budget={budgetData} type="expense" transactions={5} />
+        <RecentTransactions budget={budget} type="expense" transactions={5} />
         <div style={{ height: '1.5vh' }} />
-        <RecentTransactions budget={budgetData} type="income" transactions={3} />
+        <RecentTransactions budget={budget} type="income" transactions={3} />
       </div>
       <div style={{ width: '30vw' }}>
         <p style={{ color: 'white', margin: 0 }}>Yearly</p>
@@ -38,18 +38,18 @@ function Home() {
           display: 'flex', alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row',
         }}
         >
-          <Total budget={budgetData} interval="Y" index={0} type="income" />
-          <Total budget={budgetData} interval="Y" index={0} type="expense" />
-          <Total budget={budgetData} interval="Y" index={0} type="saving" />
+          <Total budget={budget} interval="Y" index={0} type="income" />
+          <Total budget={budget} interval="Y" index={0} type="expense" />
+          <Total budget={budget} interval="Y" index={0} type="saving" />
         </div>
         <p style={{ color: 'white', margin: 0 }}>Monthly</p>
         <div style={{
           display: 'flex', alignItems: 'center', justifyContent: 'space-around', flexDirection: 'row',
         }}
         >
-          <Total budget={budgetData} interval="M" index={0} type="income" />
-          <Total budget={budgetData} interval="M" index={0} type="expense" />
-          <Total budget={budgetData} interval="M" index={0} type="saving" />
+          <Total budget={budget} interval="M" index={0} type="income" />
+          <Total budget={budget} interval="M" index={0} type="expense" />
+          <Total budget={budget} interval="M" index={0} type="saving" />
         </div>
       </div>
       <div>
@@ -57,7 +57,7 @@ function Home() {
           <UpdateBudgetReusable BudgetClass="add" />
         </div>
         <div style={{ height: '2.5vh' }} />
-        <CategoryTable budget={budgetData} categories={5} index={0} type="expense" />
+        <CategoryTable budget={budget} categories={5} index={0} type="expense" />
       </div>
       <Modal isOpen={modal} toggle={() => { setModal(false); }} style={{ marginTop: '65px', width: '30vw' }}>
         <ModalHeader toggle={() => { setModal(false); }} close={closeBtn}>

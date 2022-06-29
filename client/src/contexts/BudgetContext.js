@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useEffect, useMemo, useReducer,
+  createContext, useContext, useEffect, useMemo, useReducer, useState,
 } from 'react';
 import {
   apiAddBudget, apiRemoveBudget, apiGetBudgetByUser, apiUpdateBudget,
@@ -16,7 +16,6 @@ const budgetReducer = (state, action) => {
     case 'ADD_BUDGET':
       return [...state, action.payload];
     case 'UPDATE_BUDGET':
-      console.log(action.payload);
       return state.map((currBudget) => {
         if (currBudget._id === action.payload._id) return action.payload;
         return currBudget;
@@ -30,6 +29,8 @@ const budgetReducer = (state, action) => {
 
 function BudgetProvider({ children }) {
   const [budget, dispatch] = useReducer(budgetReducer, []);
+  const [expense, setExpense] = useState([]);
+  const [income, setIncome] = useState([]);
   const user = useUserState();
 
   const initBudget = () => {
@@ -66,14 +67,21 @@ function BudgetProvider({ children }) {
 
   const budgetActions = useMemo(() => [addBudget, updateBudget, removeBudget], []);
 
+  const budgetData = useMemo(() => ({ budget, expense, income }), [budget, expense, income]);
+
   useEffect(() => {
     if (user._id) {
       initBudget();
     }
   }, [user._id]);
 
+  useEffect(() => {
+    setExpense(budget.filter((budgetItem) => budgetItem.budgetType === 'expense'));
+    setIncome(budget.filter((budgetItem) => budgetItem.budgetType === 'income'));
+  }, [budget]);
+
   return (
-    <BudgetStateContext.Provider value={budget}>
+    <BudgetStateContext.Provider value={budgetData}>
       <BudgetActionsContext.Provider value={budgetActions}>
         {children}
       </BudgetActionsContext.Provider>
