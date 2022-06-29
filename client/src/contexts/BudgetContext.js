@@ -4,6 +4,7 @@ import React, {
 import {
   apiAddBudget, apiRemoveBudget, apiGetBudgetByUser, apiUpdateBudget,
 } from '../utils/api';
+import { useUserState } from './UserContext';
 
 const BudgetStateContext = createContext();
 const BudgetActionsContext = createContext();
@@ -29,11 +30,11 @@ const budgetReducer = (state, action) => {
 
 function BudgetProvider({ children }) {
   const [budget, dispatch] = useReducer(budgetReducer, []);
-  const userId = sessionStorage.getItem('id');
+  const user = useUserState();
 
   const initBudget = () => {
     try {
-      apiGetBudgetByUser(userId).then((res) => dispatch({ type: 'INIT_BUDGET', payload: res.data }));
+      apiGetBudgetByUser(user._id).then((res) => dispatch({ type: 'INIT_BUDGET', payload: res.data }));
     } catch (err) {
       console.log(err);
     }
@@ -66,10 +67,10 @@ function BudgetProvider({ children }) {
   const budgetActions = useMemo(() => [addBudget, updateBudget, removeBudget], []);
 
   useEffect(() => {
-    if (userId) {
+    if (user._id) {
       initBudget();
     }
-  }, [userId]);
+  }, [user._id]);
 
   return (
     <BudgetStateContext.Provider value={budget}>

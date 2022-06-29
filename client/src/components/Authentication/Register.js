@@ -4,12 +4,11 @@ import {
 } from 'reactstrap';
 import { Form, Row, Col } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
-
 import Collapse from '@material-ui/core/Collapse';
 import Alert from '@material-ui/lab/Alert';
-import { login, logout } from '../../utils/common';
 import { validatePassword, validateEmail, validatePasswordLiteral } from '../../utils/regex';
 import { apiRegister } from '../../utils/api';
+import { useUserActions } from '../../contexts/UserContext';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -21,6 +20,7 @@ function Register() {
   const [alertMessage, setAlertMessage] = useState('');
   const [alertAlreadyLoggedIn, setAlertAlreadyLoggedIn] = useState(false);
   const history = useHistory();
+  const [login, logout] = useUserActions();
 
   const dismissAlerts = () => {
     setAlertMessage('');
