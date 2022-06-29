@@ -1,8 +1,8 @@
 const express = require('express');
+const { check } = require('express-validator');
 const budgetModel = require('../models/budget');
 
 const app = express();
-const { check, validationResult } = require('express-validator');
 
 app.get('/budget-by-user/:id', async (req, res) => {
   const budget = await budgetModel.find({ _userId: req.params.id });
@@ -30,12 +30,10 @@ app.post('/budget', [
   check('budgetCategory', 'Category required').not().isEmpty(),
   check('budgetDescription', 'Description required').not().isEmpty(),
 ], async (req, res) => {
-  const budget = new budgetModel(req.body);
+  const budget = await budgetModel.create(req.body);
   try {
-    await budget.save();
     res.send(budget);
   } catch (err) {
-    console.log(err);
     res.status(500).send(err);
   }
 });
@@ -52,8 +50,9 @@ app.delete('/budget/:id', async (req, res) => {
 
 app.patch('/budget/:id', async (req, res) => {
   try {
-    const budget = await budgetModel.findByIdAndUpdate(req.params.id, req.body);
-    await budget.save();
+    const budget = await budgetModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     res.send(budget);
   } catch (err) {
     console.log(err);

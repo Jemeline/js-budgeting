@@ -10,7 +10,7 @@ export default function RecentTransactions({ budget, transactions, type }) {
   const [budgetColumns, setBudgetColumns] = useState([]);
 
   useEffect(async () => {
-    const filteredBudget = typeof (budget.data) === 'undefined' ? [] : budget.data.filter((ele) => ele.budgetType === type);
+    const filteredBudget = typeof (budget) === 'undefined' ? [] : budget.filter((ele) => ele.budgetType === type);
     filteredBudget.sort((a, b) => new Date(a.budgetDate) - new Date(b.budgetDate)).reverse();
     const reducedBudget = filteredBudget.slice(0, transactions);
 

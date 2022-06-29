@@ -32,7 +32,7 @@ export default function BudgetTable({ budget, type }) {
   }
 
   useEffect(async () => {
-    const filteredBudget = typeof (budget.data) === 'undefined' ? [] : budget.data.filter((ele) => ele.budgetType === type);
+    const filteredBudget = typeof (budget) === 'undefined' ? [] : budget.filter((ele) => ele.budgetType === type);
     filteredBudget.sort((a, b) => new Date(a.budgetDate) - new Date(b.budgetDate)).reverse();
     setBudgetColumns([
       { field: 'date', headerName: 'Date', flex: 0.125 },
