@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
+import { UserProvider } from './contexts/UserContext';
+import { BudgetProvider } from './contexts/BudgetContext';
 import Routes from './routes/routes';
 
 function App() {
@@ -11,7 +13,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes />
+        <UserProvider>
+          <BudgetProvider>
+            <Routes />
+          </BudgetProvider>
+        </UserProvider>
       </BrowserRouter>
     </div>
   );

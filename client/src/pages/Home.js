@@ -2,30 +2,24 @@ import React, { useState, useEffect } from 'react';
 import {
   Modal, ModalHeader, ModalBody, Button,
 } from 'reactstrap';
-import { apiGetUser } from '../utils/api';
 import VerifyEmail from '../components/Authentication/VerifyEmail';
 import CategoryTable from '../components/Tables/CategoryTable';
 import RecentTransactions from '../components/Tables/RecentTransactions';
 import UpdateBudgetReusable from '../components/Dashboard/UpdateBudgetReusable';
 import Total from '../components/Dashboard/Total';
 import { useBudgetState } from '../contexts/BudgetContext';
+import { useUserState } from '../contexts/UserContext';
 
 function Home() {
   const [modal, setModal] = useState(false);
   const budgetData = useBudgetState();
-  const id = sessionStorage.getItem('id');
+  const user = useUserState();
 
   useEffect(() => {
-    try {
-      apiGetUser(id).then((user) => {
-        if (!user.data.isVerified) {
-          setModal(true);
-        }
-      });
-    } catch (err) {
-      console.log(err);
+    if (user._id && !user.isVerified) {
+      setModal(true);
     }
-  }, []);
+  }, [user]);
 
   const closeBtn = <Button size="sm" onClick={() => { setModal(false); }} style={{ backgroundColor: 'white', borderColor: 'white', outline: 'none' }}><strong style={{ fontSize: '20px' }}>&times;</strong></Button>;
   return (

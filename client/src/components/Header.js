@@ -1,10 +1,11 @@
 import React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { logout } from '../utils/common';
+import { useUserActions } from '../contexts/UserContext';
 
 export default function Navigation() {
   const history = useHistory();
   const location = useLocation().pathname;
+  const [, logout] = useUserActions();
 
   const getColor = (loc) => (location === loc ? '#D90166' : 'transparent');
 

@@ -3,12 +3,10 @@ import {
   Button, Col, Form, FormGroup, FormFeedback, Input,
 } from 'reactstrap';
 import Alert from '@material-ui/lab/Alert';
-import { Link, useHistory } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 import Collapse from '@material-ui/core/Collapse';
-import { login, logout } from '../../utils/common';
 import { validateEmail } from '../../utils/regex';
-import { apiLogin } from '../../utils/api';
+import { useUser } from '../../contexts/UserContext';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -17,7 +15,7 @@ function Login() {
   const [alertInvalidCreds, setAlertInvalidCreds] = useState(false);
   const [alertAlreadyLoggedIn, setAlertAlreadyLoggedIn] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
-  const history = useHistory();
+  const [user, [login, logout]] = useUser();
 
   const dismissAlerts = () => {
     setAlertLogin(false);
@@ -32,11 +30,9 @@ function Login() {
         dismissAlerts();
         setAlertLogin(true);
         setAlertMessage('Please fill in all required fields');
-      } else if (!sessionStorage.getItem('id')) {
+      } else if (!user._id) {
         const payload = { email, password };
-        const data = await apiLogin(payload);
-        login(data.data.user._id);
-        history.push('/');
+        login(payload);
       } else {
         dismissAlerts();
         setAlertAlreadyLoggedIn(true);
@@ -65,7 +61,7 @@ function Login() {
             <Alert severity="error" onClose={() => setAlertLogin(false)}>{alertMessage}</Alert>
           </Collapse>
           <Collapse in={alertInvalidCreds} style={{ marginBottom: '10px' }}>
-            <Alert severity="error" onClose={() => setAlertInvalidCreds(false)}>We can't find that username and password.</Alert>
+            <Alert severity="error" onClose={() => setAlertInvalidCreds(false)}>We can&apos;t find that username and password.</Alert>
           </Collapse>
           <Collapse in={alertAlreadyLoggedIn} style={{ marginBottom: '10px' }}>
             <Alert severity="info" onClose={() => setAlertAlreadyLoggedIn(false)}>
@@ -116,7 +112,7 @@ function Login() {
               Sign In
             </Button>
           </Form>
-          Don't Have an Account?
+          Don&apos;t Have an Account?
           <Link to="/register" style={{ marginLeft: '1vw' }}>Sign Up Now</Link>
           <br />
           <Link to="/register">Forgot Password?</Link>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Header from '../components/Header';
 
 function PrivateRoute({ component: Component, path }) {
-  if (sessionStorage.getItem('id')) {
+  const sessionId = Cookies.get('jsb-session-id');
+  if (sessionId) {
     const privateComponent = (
       <>
         <Header />
